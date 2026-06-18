@@ -1,0 +1,16 @@
+# OS
+.DS_Store
+
+# Claude Code (local tooling config — not part of the project)
+.claude/
+
+# Dependencies / build output (also covered per-package)
+node_modules/
+dist/
+.next/
+out/
+*.tsbuildinfo
+
+# Secrets — *.example files ARE committed, real envs are NOT
+.env
+.env*.local

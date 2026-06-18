@@ -1,0 +1,13 @@
+node_modules
+dist
+*.log
+*.tsbuildinfo
+
+# Local environment
+.env
+
+# SQLite database files (data on disk)
+/data
+*.db
+*.db-shm
+*.db-wal

@@ -1,0 +1,3 @@
+# pnpm 11 build-script allowlist. Next.js pulls in sharp (native image lib).
+allowBuilds:
+  sharp: true

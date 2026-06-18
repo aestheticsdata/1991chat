@@ -1,0 +1,4 @@
+# pnpm 11 build-script allowlist. better-sqlite3 needs its native binary
+# built/downloaded on install.
+allowBuilds:
+  better-sqlite3: true
