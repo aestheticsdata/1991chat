@@ -45,9 +45,11 @@ export default function LoginPage() {
           <h1 className="mb-1 font-display text-xl">1991CHAT</h1>
           <p className="mb-5 text-sm text-neutral-500">Sign in to continue</p>
 
-          <label className="mb-3 block text-sm">
+          <label htmlFor="username" className="mb-3 block text-sm">
             <span className="mb-1 block text-neutral-600">Username</span>
             <input
+              id="username"
+              name="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               autoComplete="username"
@@ -55,9 +57,11 @@ export default function LoginPage() {
             />
           </label>
 
-          <label className="mb-4 block text-sm">
+          <label htmlFor="password" className="mb-4 block text-sm">
             <span className="mb-1 block text-neutral-600">Password</span>
             <PasswordInput
+              id="password"
+              name="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               autoComplete="current-password"
