@@ -1,7 +1,7 @@
 import { Body, Controller, Get, HttpCode, Post, Req, UseGuards } from "@nestjs/common";
 import type { Request } from "express";
 import { AuthService } from "@application/auth/auth.service";
-import { LoginDto, RegisterDto } from "@application/dto/auth.dto";
+import { ChangePasswordDto, LoginDto, RegisterDto } from "@application/dto/auth.dto";
 import { User } from "@domain/user.entity";
 import { RedisService } from "@infrastructure/redis/redis.service";
 import { CsrfGuard } from "@interface/http/csrf.guard";
@@ -60,6 +60,15 @@ export class AuthController {
     return new Promise((resolve, reject) => {
       req.session.destroy((err) => (err ? reject(err) : resolve({ ok: true })));
     });
+  }
+
+  /** Change the current user's password (the current password must match). */
+  @Post("change-password")
+  @HttpCode(200)
+  @UseGuards(SessionAuthGuard, CsrfGuard)
+  async changePassword(@Body() dto: ChangePasswordDto, @CurrentUser() user: AuthUser): Promise<{ ok: boolean }> {
+    await this.auth.changePassword(user.id, dto.currentPassword, dto.newPassword);
+    return { ok: true };
   }
 
   /**

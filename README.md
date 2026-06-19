@@ -22,7 +22,7 @@ cd backend && pnpm install && cp .env.example .env && pnpm start:dev
 cd front && pnpm install && cp .env.local.example .env.local && pnpm dev
 ```
 
-Open <http://localhost:6401> and sign in with the seeded dev user **`admin` / `admin`**.
+Open <http://localhost:6401> and create an account on the sign-up page (no default user is seeded).
 
 ## Stack
 

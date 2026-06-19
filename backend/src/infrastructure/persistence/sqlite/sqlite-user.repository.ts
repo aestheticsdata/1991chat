@@ -33,6 +33,10 @@ export class SqliteUserRepository extends UserRepository {
       .run(user.id, user.username, user.passwordHash, user.createdAt.getTime());
   }
 
+  async updatePassword(id: string, passwordHash: string): Promise<void> {
+    this.db.prepare("UPDATE users SET password_hash = ? WHERE id = ?").run(passwordHash, id);
+  }
+
   private toUser(row: UserRow): User {
     return new User(row.id, row.username, row.password_hash, new Date(row.created_at));
   }

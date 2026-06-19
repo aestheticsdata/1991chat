@@ -51,5 +51,12 @@ export async function apiFetch(path: string, init: RequestInit = {}): Promise<Re
     }
   }
 
+  // Session missing/expired → bounce to login (covers idle tabs, not just the
+  // full-page navigations the server-side gate already handles).
+  if (res.status === 401 && typeof window !== "undefined" && window.location.pathname !== "/login") {
+    setCsrfToken(null);
+    window.location.replace("/login");
+  }
+
   return res;
 }

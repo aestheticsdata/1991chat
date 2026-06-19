@@ -17,8 +17,9 @@ pnpm start:dev            # http://localhost:6400
 
 The API runs on `6400`, the front on `6401`.
 
-A default user (`admin` / `admin`, configurable via `AUTH_DEFAULT_*`) is seeded on first start.
-The SQLite file is created at `DATABASE_PATH` (default `./data/1991chat.db`); sessions live in Redis.
+No default user is seeded — create one via the sign-up page or `POST /auth/register`. (Optionally set
+`AUTH_DEFAULT_*` to seed one on first start.) The SQLite file is created at `DATABASE_PATH` (default
+`./data/1991chat.db`); sessions live in Redis.
 
 ## Architecture
 
@@ -67,6 +68,7 @@ Auth column: **session** = requires the `1991.sid` cookie; **+CSRF** = also requ
 | GET  | `/auth/me` | session | → `{ user, csrfToken }` |
 | GET  | `/auth/csrf` | session | → `{ csrfToken }` (rotates) |
 | POST | `/auth/logout` | session +CSRF | destroys the session |
+| POST | `/auth/change-password` | session +CSRF | `{ currentPassword, newPassword }` → `{ ok }` |
 | GET  | `/conversations` | session | list |
 | POST | `/conversations` | session +CSRF | `{ title? }` |
 | GET  | `/conversations/:id` | session | returns messages |
@@ -82,9 +84,9 @@ Auth column: **session** = requires the `1991.sid` cookie; **+CSRF** = also requ
 beats `?scenario=`, which beats the `MOCK_SCENARIO` default). No restart needed.
 
 ```bash
-# log in, capturing the cookie jar + the CSRF token
+# log in, capturing the cookie jar + the CSRF token (use an account you created)
 csrf=$(curl -s -c jar -X POST localhost:6400/auth/login \
-  -H 'content-type: application/json' -d '{"username":"admin","password":"admin"}' \
+  -H 'content-type: application/json' -d '{"username":"alice","password":"alice-password"}' \
   | node -pe 'JSON.parse(require("fs").readFileSync(0)).csrfToken')
 
 # long "thinking" pause, then tokens

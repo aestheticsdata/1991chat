@@ -17,7 +17,7 @@ export class RemoteLlmAdapter extends ChatLlmProvider {
     super();
   }
 
-  // eslint-disable-next-line require-yield
+  // biome-ignore lint/correctness/useYield: stub throws until the provider mapping is implemented
   async *stream(prompt: ChatPrompt, signal: AbortSignal): AsyncIterable<TokenChunk> {
     const { baseUrl, apiKey } = this.config.llm;
     if (!baseUrl) {
