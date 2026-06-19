@@ -86,10 +86,10 @@ export function loadConfig(): AppConfig {
     },
     session: {
       secret: sessionSecret,
-      cookieName: process.env.SESSION_COOKIE_NAME?.trim() || "1991.sid",
+      cookieName: process.env.SESSION_COOKIE_NAME?.trim() || "1991chat.sid",
       ttlSeconds: intFromEnv(process.env.SESSION_TTL_SECONDS, 1200), // 20 min sliding idle timeout
       cookieSecure: boolFromEnv(process.env.COOKIE_SECURE, false),
-      redisPrefix: process.env.SESSION_REDIS_PREFIX?.trim() || "1991:sess:",
+      redisPrefix: process.env.SESSION_REDIS_PREFIX?.trim() || "1991chat:sess:",
     },
     auth: {
       defaultUsername: process.env.AUTH_DEFAULT_USERNAME?.trim() || null,
