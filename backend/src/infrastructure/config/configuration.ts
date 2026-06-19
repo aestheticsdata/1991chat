@@ -87,7 +87,7 @@ export function loadConfig(): AppConfig {
     session: {
       secret: sessionSecret,
       cookieName: process.env.SESSION_COOKIE_NAME?.trim() || "1991.sid",
-      ttlSeconds: intFromEnv(process.env.SESSION_TTL_SECONDS, 86400),
+      ttlSeconds: intFromEnv(process.env.SESSION_TTL_SECONDS, 1200), // 20 min sliding idle timeout
       cookieSecure: boolFromEnv(process.env.COOKIE_SECURE, false),
       redisPrefix: process.env.SESSION_REDIS_PREFIX?.trim() || "1991:sess:",
     },
