@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Audiowide&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 
 /*
@@ -26,11 +27,11 @@ body {
   height: 100%;
 }
 
-/* Mulish for body text; Michroma reserved for the brand via .font-display. */
+/* Fonts loaded via the @import at the top. Body = IBM Plex Sans, brand = Audiowide. */
 body {
-  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  font-family: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
 }
 
 .font-display {
-  font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  font-family: "Audiowide", ui-sans-serif, system-ui, sans-serif;
 }

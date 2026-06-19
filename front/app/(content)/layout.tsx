@@ -29,7 +29,7 @@ export default async function ContentLayout({ children }: { children: ReactNode 
       <aside className="flex w-64 shrink-0 flex-col border-r border-neutral-200 bg-white">
         <div className="border-b border-neutral-200 px-4 py-3">
           <Link href="/" className="font-display text-base text-neutral-900 transition hover:text-neutral-600">
-            1991chat
+            1991CHAT
           </Link>
         </div>
         <SidebarAccountNav username={user.username} />
