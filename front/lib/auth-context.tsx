@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
-import { setCsrfToken } from '@lib/api';
+import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { setCsrfToken } from "@lib/api";
 
 export interface AuthUser {
   id: string;
@@ -29,7 +29,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     let active = true;
-    fetch('/api/auth/me', { credentials: 'same-origin' })
+    fetch("/api/auth/me", { credentials: "same-origin" })
       .then(async (res) => {
         if (!active || !res.ok) return;
         const data = (await res.json()) as { user: AuthUser; csrfToken: string };
@@ -55,15 +55,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setCsrfToken(null);
   }
 
-  return (
-    <AuthContext.Provider value={{ user, loading, setAuth, clearAuth }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={{ user, loading, setAuth, clearAuth }}>{children}</AuthContext.Provider>;
 }
 
 export function useAuth(): AuthContextValue {
   const ctx = useContext(AuthContext);
-  if (!ctx) throw new Error('useAuth must be used within <AuthProvider>');
+  if (!ctx) throw new Error("useAuth must be used within <AuthProvider>");
   return ctx;
 }

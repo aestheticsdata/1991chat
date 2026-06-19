@@ -1,8 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { Conversation, UNTITLED_CONVERSATION } from '@domain/conversation.entity';
-import { Message } from '@domain/message.entity';
-import { ChatLlmProvider, ChatPrompt, TokenChunk } from '@domain/ports/chat-llm-provider.port';
-import { ConversationRepository } from '@domain/ports/conversation-repository.port';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { Conversation, UNTITLED_CONVERSATION } from "@domain/conversation.entity";
+import { Message } from "@domain/message.entity";
+import { ChatLlmProvider, ChatPrompt, TokenChunk } from "@domain/ports/chat-llm-provider.port";
+import { ConversationRepository } from "@domain/ports/conversation-repository.port";
 
 export interface StreamChatCommand {
   userId: string;
@@ -36,7 +36,7 @@ export class StreamChatUseCase {
   async start(command: StreamChatCommand): Promise<ChatTurn> {
     const conversation = await this.conversations.findWithMessages(command.conversationId);
     if (!conversation || !conversation.belongsTo(command.userId)) {
-      throw new NotFoundException('Conversation not found');
+      throw new NotFoundException("Conversation not found");
     }
 
     const userMessage = Message.user(conversation.id, command.content);

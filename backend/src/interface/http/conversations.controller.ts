@@ -1,12 +1,12 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, Post, UseGuards } from '@nestjs/common';
-import { ConversationService } from '@application/conversations/conversation.service';
-import { CreateConversationDto } from '@application/dto/create-conversation.dto';
-import { Conversation } from '@domain/conversation.entity';
-import { CsrfGuard } from '@interface/http/csrf.guard';
-import { AuthUser, CurrentUser } from '@interface/http/current-user.decorator';
-import { SessionAuthGuard } from '@interface/http/session-auth.guard';
+import { Body, Controller, Delete, Get, HttpCode, Param, Post, UseGuards } from "@nestjs/common";
+import { ConversationService } from "@application/conversations/conversation.service";
+import { CreateConversationDto } from "@application/dto/create-conversation.dto";
+import { Conversation } from "@domain/conversation.entity";
+import { CsrfGuard } from "@interface/http/csrf.guard";
+import { AuthUser, CurrentUser } from "@interface/http/current-user.decorator";
+import { SessionAuthGuard } from "@interface/http/session-auth.guard";
 
-@Controller('conversations')
+@Controller("conversations")
 @UseGuards(SessionAuthGuard, CsrfGuard)
 export class ConversationsController {
   constructor(private readonly conversations: ConversationService) {}
@@ -23,8 +23,8 @@ export class ConversationsController {
     return summary(conversation);
   }
 
-  @Get(':id')
-  async get(@CurrentUser() user: AuthUser, @Param('id') id: string) {
+  @Get(":id")
+  async get(@CurrentUser() user: AuthUser, @Param("id") id: string) {
     const conversation = await this.conversations.getOwned(user.id, id);
     return {
       ...summary(conversation),
@@ -38,9 +38,9 @@ export class ConversationsController {
     };
   }
 
-  @Delete(':id')
+  @Delete(":id")
   @HttpCode(204)
-  async remove(@CurrentUser() user: AuthUser, @Param('id') id: string): Promise<void> {
+  async remove(@CurrentUser() user: AuthUser, @Param("id") id: string): Promise<void> {
     await this.conversations.delete(user.id, id);
   }
 }

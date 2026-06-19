@@ -13,10 +13,10 @@
  * `MessageStatus` is just the union 'pending' | 'streaming' | 'complete' | 'error'.
  */
 export const MessageStatus = {
-  Pending: 'pending',
-  Streaming: 'streaming',
-  Complete: 'complete',
-  Error: 'error',
+  Pending: "pending",
+  Streaming: "streaming",
+  Complete: "complete",
+  Error: "error",
 } as const;
 
 export type MessageStatus = (typeof MessageStatus)[keyof typeof MessageStatus];

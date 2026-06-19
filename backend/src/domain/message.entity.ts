@@ -1,6 +1,6 @@
-import { randomUUID } from 'node:crypto';
-import { MessageRole } from '@domain/message-role';
-import { MessageStatus } from '@domain/message-status';
+import { randomUUID } from "node:crypto";
+import { MessageRole } from "@domain/message-role";
+import { MessageStatus } from "@domain/message-status";
 
 /**
  * A single chat message belonging to a conversation. Assistant messages are
@@ -19,12 +19,12 @@ export class Message {
 
   /** A finished user turn. */
   static user(conversationId: string, content: string): Message {
-    return new Message(randomUUID(), conversationId, 'user', content, MessageStatus.Complete, new Date());
+    return new Message(randomUUID(), conversationId, "user", content, MessageStatus.Complete, new Date());
   }
 
   /** A fresh, empty assistant message in the Pending ("thinking") state. */
   static assistantPending(conversationId: string): Message {
-    return new Message(randomUUID(), conversationId, 'assistant', '', MessageStatus.Pending, new Date());
+    return new Message(randomUUID(), conversationId, "assistant", "", MessageStatus.Pending, new Date());
   }
 
   appendDelta(delta: string): void {

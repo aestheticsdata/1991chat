@@ -1,5 +1,5 @@
-import { MessageStatus } from '@domain/message-status';
-import { TokenChunk } from '@domain/ports/chat-llm-provider.port';
+import { MessageStatus } from "@domain/message-status";
+import { TokenChunk } from "@domain/ports/chat-llm-provider.port";
 
 /**
  * Minimal subset of the express Response we need — keeps this util testable and
@@ -14,8 +14,8 @@ export interface SseResponse {
 }
 
 function frame(event: string | null, data: unknown): string {
-  const payload = typeof data === 'string' ? data : JSON.stringify(data);
-  return (event ? `event: ${event}\n` : '') + `data: ${payload}\n\n`;
+  const payload = typeof data === "string" ? data : JSON.stringify(data);
+  return (event ? `event: ${event}\n` : "") + `data: ${payload}\n\n`;
 }
 
 /**
@@ -30,15 +30,15 @@ function frame(event: string | null, data: unknown): string {
  *   error  { status: 'error', message }  the provider threw mid-stream
  */
 export async function writeSse(res: SseResponse, stream: AsyncIterable<TokenChunk>): Promise<void> {
-  res.setHeader('Content-Type', 'text/event-stream');
-  res.setHeader('Cache-Control', 'no-cache, no-transform');
-  res.setHeader('Connection', 'keep-alive');
-  res.setHeader('X-Accel-Buffering', 'no'); // don't let nginx buffer the stream
+  res.setHeader("Content-Type", "text/event-stream");
+  res.setHeader("Cache-Control", "no-cache, no-transform");
+  res.setHeader("Connection", "keep-alive");
+  res.setHeader("X-Accel-Buffering", "no"); // don't let nginx buffer the stream
   res.flushHeaders?.();
 
   // Flush an opening event so the client reacts before the first token — matters
   // for the long "pending" scenario.
-  res.write(frame('open', { status: MessageStatus.Pending }));
+  res.write(frame("open", { status: MessageStatus.Pending }));
 
   try {
     for await (const chunk of stream) {
@@ -47,12 +47,12 @@ export async function writeSse(res: SseResponse, stream: AsyncIterable<TokenChun
       res.write(frame(null, { delta: chunk.delta }));
     }
     if (!res.writableEnded) {
-      res.write(frame('done', { status: MessageStatus.Complete }));
+      res.write(frame("done", { status: MessageStatus.Complete }));
     }
   } catch (error) {
     if (!res.writableEnded) {
-      const message = error instanceof Error ? error.message : 'stream failed';
-      res.write(frame('error', { status: MessageStatus.Error, message }));
+      const message = error instanceof Error ? error.message : "stream failed";
+      res.write(frame("error", { status: MessageStatus.Error, message }));
     }
   } finally {
     if (!res.writableEnded) res.end();

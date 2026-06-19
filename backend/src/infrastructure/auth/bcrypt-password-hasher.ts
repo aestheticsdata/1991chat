@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common';
-import * as bcrypt from 'bcryptjs';
-import { PasswordHasher } from '@application/auth/password-hasher.port';
+import { Injectable } from "@nestjs/common";
+import * as bcrypt from "bcryptjs";
+import { PasswordHasher } from "@application/auth/password-hasher.port";
 
 const SALT_ROUNDS = 10;
 

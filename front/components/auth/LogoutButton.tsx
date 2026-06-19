@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import { useRouter } from 'next/navigation';
-import { apiFetch } from '@lib/api';
-import { useAuth } from '@lib/auth-context';
+import { useRouter } from "next/navigation";
+import { apiFetch } from "@lib/api";
+import { useAuth } from "@lib/auth-context";
 
 export function LogoutButton() {
   const router = useRouter();
   const { clearAuth } = useAuth();
 
   async function logout() {
-    await apiFetch('/auth/logout', { method: 'POST' });
+    await apiFetch("/auth/logout", { method: "POST" });
     clearAuth();
-    router.replace('/login');
+    router.replace("/login");
     router.refresh();
   }
 

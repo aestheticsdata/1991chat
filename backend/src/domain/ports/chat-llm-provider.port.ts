@@ -1,4 +1,4 @@
-import { MessageRole } from '@domain/message-role';
+import { MessageRole } from "@domain/message-role";
 
 /** A single streamed token (or small group of tokens) from the LLM. */
 export interface TokenChunk {

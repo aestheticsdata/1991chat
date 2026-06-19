@@ -1,8 +1,8 @@
-import 'express-session';
+import "express-session";
 
 // What we keep in each server-side session (stored in Redis, keyed by the
 // opaque sid in the httpOnly cookie).
-declare module 'express-session' {
+declare module "express-session" {
   interface SessionData {
     userId?: string;
     username?: string;

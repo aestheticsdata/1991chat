@@ -1,9 +1,9 @@
-import Database from 'better-sqlite3';
-import { mkdirSync } from 'node:fs';
-import { dirname } from 'node:path';
+import Database from "better-sqlite3";
+import { mkdirSync } from "node:fs";
+import { dirname } from "node:path";
 
 /** DI token for the shared better-sqlite3 connection. */
-export const SQLITE = Symbol('SQLITE');
+export const SQLITE = Symbol("SQLITE");
 
 export type SqliteDatabase = Database.Database;
 
@@ -43,12 +43,12 @@ CREATE INDEX IF NOT EXISTS idx_messages_conversation
  * conversation cascades to its messages.
  */
 export function createDatabase(path: string): SqliteDatabase {
-  if (path !== ':memory:') {
+  if (path !== ":memory:") {
     mkdirSync(dirname(path), { recursive: true });
   }
   const db = new Database(path);
-  db.pragma('journal_mode = WAL');
-  db.pragma('foreign_keys = ON');
+  db.pragma("journal_mode = WAL");
+  db.pragma("foreign_keys = ON");
   db.exec(SCHEMA);
   return db;
 }

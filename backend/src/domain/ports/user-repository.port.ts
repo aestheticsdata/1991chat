@@ -1,4 +1,4 @@
-import { User } from '@domain/user.entity';
+import { User } from "@domain/user.entity";
 
 /**
  * OUTBOUND PORT for user persistence. Async on purpose: the current adapter is

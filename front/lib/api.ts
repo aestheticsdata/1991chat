@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 // CSRF token cached in memory. Set by AuthProvider on login /
 // hydration; read here to attach the x-csrf-token header on unsafe requests.
@@ -7,7 +7,7 @@ export function setCsrfToken(token: string | null): void {
   csrfToken = token;
 }
 
-const isUnsafe = (method: string) => method !== 'GET' && method !== 'HEAD';
+const isUnsafe = (method: string) => method !== "GET" && method !== "HEAD";
 
 /**
  * Client-side fetch to the BFF (`/api/*`). The browser sends the session cookie
@@ -21,12 +21,12 @@ const isUnsafe = (method: string) => method !== 'GET' && method !== 'HEAD';
  *   const reader = res.body!.getReader(); // read the SSE stream
  */
 export async function apiFetch(path: string, init: RequestInit = {}): Promise<Response> {
-  const method = (init.method ?? 'GET').toUpperCase();
+  const method = (init.method ?? "GET").toUpperCase();
 
   const buildHeaders = (token: string | null): Headers => {
     const headers = new Headers(init.headers);
-    if (init.body && !headers.has('content-type')) headers.set('content-type', 'application/json');
-    if (isUnsafe(method) && token) headers.set('x-csrf-token', token);
+    if (init.body && !headers.has("content-type")) headers.set("content-type", "application/json");
+    if (isUnsafe(method) && token) headers.set("x-csrf-token", token);
     return headers;
   };
 
@@ -34,11 +34,11 @@ export async function apiFetch(path: string, init: RequestInit = {}): Promise<Re
     ...init,
     method,
     headers: buildHeaders(csrfToken),
-    credentials: 'same-origin',
+    credentials: "same-origin",
   });
 
   if (res.status === 403 && isUnsafe(method)) {
-    const refreshed = await fetch('/api/auth/csrf', { credentials: 'same-origin' });
+    const refreshed = await fetch("/api/auth/csrf", { credentials: "same-origin" });
     if (refreshed.ok) {
       const { csrfToken: fresh } = (await refreshed.json()) as { csrfToken: string };
       setCsrfToken(fresh);
@@ -46,7 +46,7 @@ export async function apiFetch(path: string, init: RequestInit = {}): Promise<Re
         ...init,
         method,
         headers: buildHeaders(fresh),
-        credentials: 'same-origin',
+        credentials: "same-origin",
       });
     }
   }

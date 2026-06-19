@@ -1,4 +1,4 @@
-import { MessageList } from '@components/MessageList';
+import { MessageList } from "@components/MessageList";
 
 // ChatDisplay — scrollable conversation area.
 // TODO (you): load the selected conversation (GET /api/conversations/:id),

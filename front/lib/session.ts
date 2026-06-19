@@ -1,5 +1,5 @@
-import { cookies } from 'next/headers';
-import { BACKEND_URL } from '@lib/backend';
+import { cookies } from "next/headers";
+import { BACKEND_URL } from "@lib/backend";
 
 export interface ServerUser {
   id: string;
@@ -16,12 +16,12 @@ export async function getServerUser(): Promise<ServerUser | null> {
   const cookieHeader = store
     .getAll()
     .map((c) => `${c.name}=${c.value}`)
-    .join('; ');
+    .join("; ");
   if (!cookieHeader) return null;
 
   const res = await fetch(`${BACKEND_URL}/auth/me`, {
     headers: { cookie: cookieHeader },
-    cache: 'no-store',
+    cache: "no-store",
   });
   if (!res.ok) return null;
 

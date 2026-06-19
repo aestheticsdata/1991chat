@@ -1,10 +1,10 @@
-import { Global, Module } from '@nestjs/common';
-import { ConversationRepository } from '@domain/ports/conversation-repository.port';
-import { UserRepository } from '@domain/ports/user-repository.port';
-import { APP_CONFIG, AppConfig } from '@infrastructure/config/configuration';
-import { createDatabase, SQLITE } from '@infrastructure/persistence/sqlite/database';
-import { SqliteConversationRepository } from '@infrastructure/persistence/sqlite/sqlite-conversation.repository';
-import { SqliteUserRepository } from '@infrastructure/persistence/sqlite/sqlite-user.repository';
+import { Global, Module } from "@nestjs/common";
+import { ConversationRepository } from "@domain/ports/conversation-repository.port";
+import { UserRepository } from "@domain/ports/user-repository.port";
+import { APP_CONFIG, AppConfig } from "@infrastructure/config/configuration";
+import { createDatabase, SQLITE } from "@infrastructure/persistence/sqlite/database";
+import { SqliteConversationRepository } from "@infrastructure/persistence/sqlite/sqlite-conversation.repository";
+import { SqliteUserRepository } from "@infrastructure/persistence/sqlite/sqlite-user.repository";
 
 /**
  * Global persistence module. Opens one SQLite connection and binds the domain

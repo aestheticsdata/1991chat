@@ -1,6 +1,6 @@
-import { NextRequest } from 'next/server';
-import { proxy } from '@lib/backend';
+import { NextRequest } from "next/server";
+import { proxy } from "@lib/backend";
 
 export function GET(req: NextRequest): Promise<Response> {
-  return proxy(req, '/auth/me');
+  return proxy(req, "/auth/me");
 }

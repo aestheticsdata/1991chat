@@ -7,7 +7,10 @@
     "build": "nest build && tsc-alias",
     "start": "nest start",
     "start:dev": "nest start --watch",
-    "start:prod": "node dist/main.js"
+    "start:prod": "node dist/main.js",
+    "format": "biome format --write .",
+    "lint": "biome lint .",
+    "check": "biome check --write ."
   },
   "dependencies": {
     "@nestjs/common": "^11.1.27",
@@ -26,6 +29,7 @@
     "txtgen": "^3.0.7"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.5.0",
     "@nestjs/cli": "^11.0.23",
     "@nestjs/schematics": "^11.1.0",
     "@types/better-sqlite3": "^7.6.13",

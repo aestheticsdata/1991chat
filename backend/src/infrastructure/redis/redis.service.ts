@@ -1,6 +1,6 @@
-import { Inject, Injectable, Logger, OnModuleDestroy } from '@nestjs/common';
-import { createClient, RedisClientType } from 'redis';
-import { APP_CONFIG, AppConfig } from '@infrastructure/config/configuration';
+import { Inject, Injectable, Logger, OnModuleDestroy } from "@nestjs/common";
+import { createClient, RedisClientType } from "redis";
+import { APP_CONFIG, AppConfig } from "@infrastructure/config/configuration";
 
 /**
  * Owns the Redis connection. Used both as the express-session store backend
@@ -14,7 +14,7 @@ export class RedisService implements OnModuleDestroy {
 
   constructor(@Inject(APP_CONFIG) config: AppConfig) {
     this.client = createClient({ url: config.redis.url });
-    this.client.on('error', (err) =>
+    this.client.on("error", (err) =>
       this.logger.error(`Redis error: ${err instanceof Error ? err.message : String(err)}`),
     );
     this.sessionPrefix = config.session.redisPrefix;

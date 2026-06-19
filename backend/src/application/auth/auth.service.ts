@@ -1,7 +1,7 @@
-import { ConflictException, Injectable, UnauthorizedException } from '@nestjs/common';
-import { User } from '@domain/user.entity';
-import { UserRepository } from '@domain/ports/user-repository.port';
-import { PasswordHasher } from '@application/auth/password-hasher.port';
+import { ConflictException, Injectable, UnauthorizedException } from "@nestjs/common";
+import { User } from "@domain/user.entity";
+import { UserRepository } from "@domain/ports/user-repository.port";
+import { PasswordHasher } from "@application/auth/password-hasher.port";
 
 /**
  * Application service for authentication. Validates credentials and creates
@@ -17,7 +17,7 @@ export class AuthService {
 
   async register(username: string, password: string): Promise<User> {
     if (await this.users.findByUsername(username)) {
-      throw new ConflictException('Username already taken');
+      throw new ConflictException("Username already taken");
     }
     const user = User.create(username, await this.hasher.hash(password));
     await this.users.save(user);
@@ -28,7 +28,7 @@ export class AuthService {
     const user = await this.users.findByUsername(username);
     if (!user || !(await this.hasher.verify(password, user.passwordHash))) {
       // Same error for "no such user" and "wrong password" — don't leak which.
-      throw new UnauthorizedException('Invalid username or password');
+      throw new UnauthorizedException("Invalid username or password");
     }
     return user;
   }

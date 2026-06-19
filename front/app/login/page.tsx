@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { FormEvent, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { useAuth } from '@lib/auth-context';
+import { FormEvent, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@lib/auth-context";
 
 export default function LoginPage() {
   const router = useRouter();
   const { setAuth } = useAuth();
-  const [username, setUsername] = useState('admin');
-  const [password, setPassword] = useState('admin');
+  const [username, setUsername] = useState("admin");
+  const [password, setPassword] = useState("admin");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -16,30 +16,27 @@ export default function LoginPage() {
     event.preventDefault();
     setLoading(true);
     setError(null);
-    const res = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      credentials: 'same-origin',
+    const res = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      credentials: "same-origin",
       body: JSON.stringify({ username, password }),
     });
     setLoading(false);
     if (res.ok) {
       const data = (await res.json()) as { user: { id: string; username: string }; csrfToken: string };
       setAuth(data.user, data.csrfToken);
-      router.replace('/');
+      router.replace("/");
       router.refresh();
     } else {
       const data = await res.json().catch(() => ({}));
-      setError(data.message ?? 'Login failed');
+      setError(data.message ?? "Login failed");
     }
   }
 
   return (
     <div className="grid h-screen place-items-center bg-neutral-50">
-      <form
-        onSubmit={onSubmit}
-        className="w-80 rounded-2xl border border-neutral-200 bg-white p-6 shadow-xs"
-      >
+      <form onSubmit={onSubmit} className="w-80 rounded-2xl border border-neutral-200 bg-white p-6 shadow-xs">
         <h1 className="mb-1 text-xl font-semibold">1991chat</h1>
         <p className="mb-5 text-sm text-neutral-500">Sign in to continue</p>
 
@@ -71,7 +68,7 @@ export default function LoginPage() {
           disabled={loading}
           className="w-full rounded-lg bg-neutral-900 px-4 py-2 text-white transition hover:bg-neutral-700 disabled:opacity-50"
         >
-          {loading ? 'Signing in…' : 'Sign in'}
+          {loading ? "Signing in…" : "Sign in"}
         </button>
 
         <p className="mt-4 text-center text-xs text-neutral-400">default dev user: admin / admin</p>

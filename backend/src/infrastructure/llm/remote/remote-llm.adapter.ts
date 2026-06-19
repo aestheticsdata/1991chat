@@ -1,6 +1,6 @@
-import { Inject, Injectable } from '@nestjs/common';
-import { ChatLlmProvider, ChatPrompt, TokenChunk } from '@domain/ports/chat-llm-provider.port';
-import { APP_CONFIG, AppConfig } from '@infrastructure/config/configuration';
+import { Inject, Injectable } from "@nestjs/common";
+import { ChatLlmProvider, ChatPrompt, TokenChunk } from "@domain/ports/chat-llm-provider.port";
+import { APP_CONFIG, AppConfig } from "@infrastructure/config/configuration";
 
 /**
  * Vendor-neutral real LLM adapter (STUB). Activated with LLM_PROVIDER=remote.
@@ -21,7 +21,7 @@ export class RemoteLlmAdapter extends ChatLlmProvider {
   async *stream(prompt: ChatPrompt, signal: AbortSignal): AsyncIterable<TokenChunk> {
     const { baseUrl, apiKey } = this.config.llm;
     if (!baseUrl) {
-      throw new Error('LLM_BASE_URL is required when LLM_PROVIDER=remote.');
+      throw new Error("LLM_BASE_URL is required when LLM_PROVIDER=remote.");
     }
 
     // --- TEMPLATE: adapt to your provider's streaming contract ----------------
@@ -48,6 +48,6 @@ export class RemoteLlmAdapter extends ChatLlmProvider {
     void prompt;
     void signal;
     void apiKey;
-    throw new Error('RemoteLlmAdapter is a stub — implement your provider mapping.');
+    throw new Error("RemoteLlmAdapter is a stub — implement your provider mapping.");
   }
 }

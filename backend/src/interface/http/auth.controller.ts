@@ -1,20 +1,20 @@
-import { Body, Controller, Get, HttpCode, Post, Req, UseGuards } from '@nestjs/common';
-import type { Request } from 'express';
-import { AuthService } from '@application/auth/auth.service';
-import { LoginDto, RegisterDto } from '@application/dto/auth.dto';
-import { User } from '@domain/user.entity';
-import { RedisService } from '@infrastructure/redis/redis.service';
-import { CsrfGuard } from '@interface/http/csrf.guard';
-import { generateCsrfToken } from '@interface/http/csrf.util';
-import { AuthUser, CurrentUser } from '@interface/http/current-user.decorator';
-import { SessionAuthGuard } from '@interface/http/session-auth.guard';
+import { Body, Controller, Get, HttpCode, Post, Req, UseGuards } from "@nestjs/common";
+import type { Request } from "express";
+import { AuthService } from "@application/auth/auth.service";
+import { LoginDto, RegisterDto } from "@application/dto/auth.dto";
+import { User } from "@domain/user.entity";
+import { RedisService } from "@infrastructure/redis/redis.service";
+import { CsrfGuard } from "@interface/http/csrf.guard";
+import { generateCsrfToken } from "@interface/http/csrf.util";
+import { AuthUser, CurrentUser } from "@interface/http/current-user.decorator";
+import { SessionAuthGuard } from "@interface/http/session-auth.guard";
 
 interface AuthResponse {
   user: AuthUser;
   csrfToken: string;
 }
 
-@Controller('auth')
+@Controller("auth")
 export class AuthController {
   constructor(
     private readonly auth: AuthService,
@@ -22,14 +22,14 @@ export class AuthController {
   ) {}
 
   /** Create an account and open a session (auto sign-in). */
-  @Post('register')
+  @Post("register")
   async register(@Body() dto: RegisterDto, @Req() req: Request): Promise<AuthResponse> {
     const user = await this.auth.register(dto.username, dto.password);
     return this.establishSession(req, user);
   }
 
   /** Verify credentials and open a session. */
-  @Post('login')
+  @Post("login")
   @HttpCode(200)
   async login(@Body() dto: LoginDto, @Req() req: Request): Promise<AuthResponse> {
     const user = await this.auth.validateCredentials(dto.username, dto.password);
@@ -37,14 +37,14 @@ export class AuthController {
   }
 
   /** Echo the current user + the active CSRF token (used to (re)hydrate the front). */
-  @Get('me')
+  @Get("me")
   @UseGuards(SessionAuthGuard)
   me(@CurrentUser() user: AuthUser, @Req() req: Request): AuthResponse {
-    return { user, csrfToken: req.session.csrfToken ?? '' };
+    return { user, csrfToken: req.session.csrfToken ?? "" };
   }
 
   /** Rotate and return a fresh CSRF token (called by the front after a 403). */
-  @Get('csrf')
+  @Get("csrf")
   @UseGuards(SessionAuthGuard)
   csrf(@Req() req: Request): { csrfToken: string } {
     const csrfToken = generateCsrfToken();
@@ -53,7 +53,7 @@ export class AuthController {
   }
 
   /** Destroy the session (real server-side logout) and clear the cookie. */
-  @Post('logout')
+  @Post("logout")
   @HttpCode(200)
   @UseGuards(SessionAuthGuard, CsrfGuard)
   logout(@Req() req: Request): Promise<{ ok: boolean }> {

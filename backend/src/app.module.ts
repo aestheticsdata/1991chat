@@ -1,11 +1,11 @@
-import { Module } from '@nestjs/common';
-import { AuthModule } from '@infrastructure/auth/auth.module';
-import { AppConfigModule } from '@infrastructure/config/config.module';
-import { LlmModule } from '@infrastructure/llm/llm.module';
-import { PersistenceModule } from '@infrastructure/persistence/persistence.module';
-import { RedisModule } from '@infrastructure/redis/redis.module';
-import { ChatModule } from '@interface/http/chat.module';
-import { ConversationsModule } from '@interface/http/conversations.module';
+import { Module } from "@nestjs/common";
+import { AuthModule } from "@infrastructure/auth/auth.module";
+import { AppConfigModule } from "@infrastructure/config/config.module";
+import { LlmModule } from "@infrastructure/llm/llm.module";
+import { PersistenceModule } from "@infrastructure/persistence/persistence.module";
+import { RedisModule } from "@infrastructure/redis/redis.module";
+import { ChatModule } from "@interface/http/chat.module";
+import { ConversationsModule } from "@interface/http/conversations.module";
 
 @Module({
   imports: [

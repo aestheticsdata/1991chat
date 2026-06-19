@@ -1,8 +1,8 @@
-import { Inject, Injectable, Logger, OnApplicationBootstrap } from '@nestjs/common';
-import { PasswordHasher } from '@application/auth/password-hasher.port';
-import { User } from '@domain/user.entity';
-import { UserRepository } from '@domain/ports/user-repository.port';
-import { APP_CONFIG, AppConfig } from '@infrastructure/config/configuration';
+import { Inject, Injectable, Logger, OnApplicationBootstrap } from "@nestjs/common";
+import { PasswordHasher } from "@application/auth/password-hasher.port";
+import { User } from "@domain/user.entity";
+import { UserRepository } from "@domain/ports/user-repository.port";
+import { APP_CONFIG, AppConfig } from "@infrastructure/config/configuration";
 
 /**
  * Seeds a default user on startup (if AUTH_DEFAULT_USERNAME/PASSWORD are set and

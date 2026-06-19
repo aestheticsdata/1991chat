@@ -1,5 +1,5 @@
-import { Conversation } from '@domain/conversation.entity';
-import { Message } from '@domain/message.entity';
+import { Conversation } from "@domain/conversation.entity";
+import { Message } from "@domain/message.entity";
 
 /**
  * OUTBOUND PORT for conversation + message persistence. Async for the same

@@ -1,8 +1,8 @@
-import { randomUUID } from 'node:crypto';
-import { Message } from '@domain/message.entity';
+import { randomUUID } from "node:crypto";
+import { Message } from "@domain/message.entity";
 
 /** Default title used until the first user message gives us something better. */
-export const UNTITLED_CONVERSATION = 'New conversation';
+export const UNTITLED_CONVERSATION = "New conversation";
 
 /**
  * A conversation aggregate: metadata plus its ordered messages. Owned by a user.
@@ -26,7 +26,7 @@ export class Conversation {
 
   /** Derive a short title from the first user message (best-effort). */
   static deriveTitle(content: string, max = 60): string {
-    const oneLine = content.replace(/\s+/g, ' ').trim();
+    const oneLine = content.replace(/\s+/g, " ").trim();
     if (!oneLine) return UNTITLED_CONVERSATION;
     return oneLine.length <= max ? oneLine : `${oneLine.slice(0, max - 1)}…`;
   }

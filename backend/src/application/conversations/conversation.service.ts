@@ -1,6 +1,6 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { Conversation } from '@domain/conversation.entity';
-import { ConversationRepository } from '@domain/ports/conversation-repository.port';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { Conversation } from "@domain/conversation.entity";
+import { ConversationRepository } from "@domain/ports/conversation-repository.port";
 
 /**
  * Application service for conversation CRUD. Enforces ownership: a user can only
@@ -24,7 +24,7 @@ export class ConversationService {
   async getOwned(userId: string, id: string): Promise<Conversation> {
     const conversation = await this.conversations.findWithMessages(id);
     if (!conversation || !conversation.belongsTo(userId)) {
-      throw new NotFoundException('Conversation not found');
+      throw new NotFoundException("Conversation not found");
     }
     return conversation;
   }
@@ -32,7 +32,7 @@ export class ConversationService {
   async delete(userId: string, id: string): Promise<void> {
     const conversation = await this.conversations.findById(id);
     if (!conversation || !conversation.belongsTo(userId)) {
-      throw new NotFoundException('Conversation not found');
+      throw new NotFoundException("Conversation not found");
     }
     await this.conversations.delete(id);
   }

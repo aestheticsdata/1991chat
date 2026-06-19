@@ -1,4 +1,4 @@
-import { randomUUID } from 'node:crypto';
+import { randomUUID } from "node:crypto";
 
 /**
  * An application user. `passwordHash` is the stored credential (salt:hash); the

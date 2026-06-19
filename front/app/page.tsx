@@ -1,9 +1,9 @@
-import { redirect } from 'next/navigation';
-import { getServerUser } from '@lib/session';
-import { LogoutButton } from '@components/auth/LogoutButton';
-import { Sidebar } from '@components/Sidebar';
-import { ChatDisplay } from '@components/ChatDisplay';
-import { Prompt } from '@components/Prompt';
+import { redirect } from "next/navigation";
+import { getServerUser } from "@lib/session";
+import { LogoutButton } from "@components/auth/LogoutButton";
+import { Sidebar } from "@components/Sidebar";
+import { ChatDisplay } from "@components/ChatDisplay";
+import { Prompt } from "@components/Prompt";
 
 /**
  * App shell + auth gate. Verifies the session server-side (asks the backend who
@@ -16,7 +16,7 @@ import { Prompt } from '@components/Prompt';
  */
 export default async function Page() {
   const user = await getServerUser();
-  if (!user) redirect('/login');
+  if (!user) redirect("/login");
 
   return (
     <div className="flex h-screen overflow-hidden">

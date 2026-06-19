@@ -1,5 +1,5 @@
-import { Global, Module } from '@nestjs/common';
-import { APP_CONFIG, loadConfig } from '@infrastructure/config/configuration';
+import { Global, Module } from "@nestjs/common";
+import { APP_CONFIG, loadConfig } from "@infrastructure/config/configuration";
 
 /**
  * Global config module. `loadConfig` runs as a factory at startup; if a required
