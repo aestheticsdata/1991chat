@@ -28,11 +28,11 @@ function Svg({ children }: { children: ReactNode }) {
 }
 
 /**
- * Account section for the chat sidebar — sits just above the conversation list.
- * Holds the per-user actions (change password, about, sign out) as a tidy menu
- * group, instead of scattering them across the sidebar header.
+ * Account actions for the chat sidebar — change password, about, sign out, as a
+ * tidy menu group. The username itself lives in the user chip at the bottom of
+ * the sidebar (see AppShell), not here.
  */
-export function SidebarAccountNav({ username }: { username: string }) {
+export function SidebarAccountNav() {
   const router = useRouter();
   const { clearAuth } = useAuth();
 
@@ -45,10 +45,6 @@ export function SidebarAccountNav({ username }: { username: string }) {
 
   return (
     <nav className="border-b border-neutral-200 p-2 text-sm">
-      <p className="truncate px-2 pb-1 text-xs font-medium text-neutral-400" title={username}>
-        {username}
-      </p>
-
       <Link href="/change-password" className={ROW}>
         <Svg>
           <circle cx="7.5" cy="15.5" r="5.5" />
