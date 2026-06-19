@@ -39,27 +39,27 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-neutral-50">
+    <div className="flex min-h-screen flex-col bg-canvas">
       <SiteHeader />
       <div className="grid flex-1 place-items-center p-4">
-        <form onSubmit={onSubmit} className="w-80 rounded-2xl border border-neutral-200 bg-white p-6 shadow-xs">
+        <form onSubmit={onSubmit} className="w-80 rounded-2xl border border-line bg-surface p-6 shadow-xs">
           <h1 className="mb-1 font-display text-xl">{text.common.brand}</h1>
-          <p className="mb-5 text-sm text-neutral-500">{text.auth.login.title}</p>
+          <p className="mb-5 text-sm text-ink-muted">{text.auth.login.title}</p>
 
           <label htmlFor="username" className="mb-3 block text-sm">
-            <span className="mb-1 block text-neutral-600">{text.auth.login.username}</span>
+            <span className="mb-1 block text-ink-muted">{text.auth.login.username}</span>
             <input
               id="username"
               name="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               autoComplete="username"
-              className="w-full rounded-lg border border-neutral-300 px-3 py-2 outline-hidden focus:border-neutral-400"
+              className="w-full rounded-lg border border-line bg-elevated px-3 py-2 text-ink outline-hidden focus:border-accent"
             />
           </label>
 
           <label htmlFor="password" className="mb-4 block text-sm">
-            <span className="mb-1 block text-neutral-600">{text.auth.login.password}</span>
+            <span className="mb-1 block text-ink-muted">{text.auth.login.password}</span>
             <PasswordInput
               id="password"
               name="password"
@@ -69,19 +69,19 @@ export default function LoginPage() {
             />
           </label>
 
-          {error && <p className="mb-3 text-sm text-red-600">{error}</p>}
+          {error && <p className="mb-3 text-sm text-red-400">{error}</p>}
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-lg bg-neutral-900 px-4 py-2 text-white transition hover:bg-neutral-700 disabled:opacity-50"
+            className="w-full rounded-lg bg-accent px-4 py-2 text-on-accent transition hover:bg-accent-strong disabled:opacity-50"
           >
             {loading ? text.auth.login.submitLoading : text.auth.login.submit}
           </button>
 
-          <p className="mt-4 text-center text-sm text-neutral-500">
+          <p className="mt-4 text-center text-sm text-ink-muted">
             {text.auth.login.noAccount}{" "}
-            <Link href="/signup" className="text-neutral-900 underline hover:text-neutral-700">
+            <Link href="/signup" className="text-ink underline hover:text-ink-muted">
               {text.auth.login.signupCta}
             </Link>
           </p>

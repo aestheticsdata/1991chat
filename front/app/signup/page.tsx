@@ -45,46 +45,46 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-neutral-50">
+    <div className="flex min-h-screen flex-col bg-canvas">
       <SiteHeader />
       <div className="grid flex-1 place-items-center p-4">
-        <form onSubmit={onSubmit} className="w-80 rounded-2xl border border-neutral-200 bg-white p-6 shadow-xs">
+        <form onSubmit={onSubmit} className="w-80 rounded-2xl border border-line bg-surface p-6 shadow-xs">
           <h1 className="mb-1 text-xl font-semibold">{text.auth.signup.heading}</h1>
-          <p className="mb-5 text-sm text-neutral-500">{text.auth.signup.subtitle}</p>
+          <p className="mb-5 text-sm text-ink-muted">{text.auth.signup.subtitle}</p>
 
           <label className="mb-3 block text-sm">
-            <span className="mb-1 block text-neutral-600">{text.auth.signup.username}</span>
+            <span className="mb-1 block text-ink-muted">{text.auth.signup.username}</span>
             <input
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               autoComplete="username"
-              className="w-full rounded-lg border border-neutral-300 px-3 py-2 outline-hidden focus:border-neutral-400"
+              className="w-full rounded-lg border border-line bg-elevated px-3 py-2 text-ink outline-hidden focus:border-accent"
             />
           </label>
 
           <label className="mb-3 block text-sm">
-            <span className="mb-1 block text-neutral-600">{text.auth.signup.password}</span>
+            <span className="mb-1 block text-ink-muted">{text.auth.signup.password}</span>
             <PasswordInput value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="new-password" />
           </label>
 
           <label className="mb-4 block text-sm">
-            <span className="mb-1 block text-neutral-600">{text.auth.signup.confirmPassword}</span>
+            <span className="mb-1 block text-ink-muted">{text.auth.signup.confirmPassword}</span>
             <PasswordInput value={confirm} onChange={(e) => setConfirm(e.target.value)} autoComplete="new-password" />
           </label>
 
-          {error && <p className="mb-3 text-sm text-red-600">{error}</p>}
+          {error && <p className="mb-3 text-sm text-red-400">{error}</p>}
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-lg bg-neutral-900 px-4 py-2 text-white transition hover:bg-neutral-700 disabled:opacity-50"
+            className="w-full rounded-lg bg-accent px-4 py-2 text-on-accent transition hover:bg-accent-strong disabled:opacity-50"
           >
             {loading ? text.auth.signup.submitLoading : text.auth.signup.submit}
           </button>
 
-          <p className="mt-4 text-center text-sm text-neutral-500">
+          <p className="mt-4 text-center text-sm text-ink-muted">
             {text.auth.signup.haveAccount}{" "}
-            <Link href="/login" className="text-neutral-900 underline hover:text-neutral-700">
+            <Link href="/login" className="text-ink underline hover:text-ink-muted">
               {text.auth.signup.loginCta}
             </Link>
           </p>

@@ -8,7 +8,7 @@ import { apiFetch } from "@lib/api";
 import { useAuth } from "@lib/auth-context";
 
 const ROW =
-  "flex w-full items-center gap-2.5 rounded-lg px-2 py-1.5 text-left text-neutral-600 transition hover:bg-neutral-100 hover:text-neutral-900";
+  "flex w-full items-center gap-2.5 rounded-lg px-2 py-1.5 text-left text-ink-muted transition hover:bg-elevated hover:text-ink";
 
 function Svg({ children }: { children: ReactNode }) {
   return (
@@ -45,7 +45,7 @@ export function SidebarAccountNav() {
   }
 
   return (
-    <nav className="border-b border-neutral-200 p-2 text-sm">
+    <nav className="border-b border-line p-2 text-sm">
       <Link href="/change-password" className={ROW}>
         <Svg>
           <circle cx="7.5" cy="15.5" r="5.5" />

@@ -7,8 +7,8 @@ import { text } from "@i18n";
 
 export function Sidebar() {
   return (
-    <nav className="p-3 text-sm text-neutral-500">
-      <p className="px-1 font-medium text-neutral-400">{text.chat.conversations}</p>
+    <nav className="p-3 text-sm text-ink-muted">
+      <p className="px-1 font-medium text-ink-faint">{text.chat.conversations}</p>
       {/* TODO: new-chat button + conversation list */}
     </nav>
   );

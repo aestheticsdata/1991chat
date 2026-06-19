@@ -43,31 +43,31 @@ export function AppShell({ username, children }: { username: string; children: R
   }, [open]);
 
   return (
-    <div className="flex h-screen overflow-hidden bg-neutral-50">
+    <div className="flex h-screen overflow-hidden bg-canvas">
       {/* Scrim — mobile only, tap to dismiss. */}
       {open && (
         <button
           type="button"
           aria-label={text.shell.closeMenu}
           onClick={() => setOpen(false)}
-          className="fixed inset-0 z-30 bg-neutral-900/40 md:hidden"
+          className="fixed inset-0 z-30 bg-black/60 md:hidden"
         />
       )}
 
       <aside
-        className={`fixed inset-y-0 left-0 z-40 flex w-4/5 shrink-0 flex-col border-r border-neutral-200 bg-white transition-transform duration-200 ease-out md:static md:z-auto md:w-64 md:translate-x-0 md:transition-none ${
+        className={`fixed inset-y-0 left-0 z-40 flex w-4/5 shrink-0 flex-col border-r border-line bg-surface transition-transform duration-200 ease-out md:static md:z-auto md:w-64 md:translate-x-0 md:transition-none ${
           open ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="flex items-center justify-between border-b border-neutral-200 px-4 py-3">
-          <Link href="/" className="font-display text-base text-neutral-900 transition hover:text-neutral-600">
+        <div className="flex items-center justify-between border-b border-line px-4 py-3">
+          <Link href="/" className="font-display text-base text-ink transition hover:text-ink-muted">
             {text.common.brand}
           </Link>
           <button
             type="button"
             aria-label={text.shell.closeMenu}
             onClick={() => setOpen(false)}
-            className="-mr-1 grid h-8 w-8 place-items-center rounded-lg text-neutral-500 transition hover:bg-neutral-100 hover:text-neutral-900 md:hidden"
+            className="-mr-1 grid h-8 w-8 place-items-center rounded-lg text-ink-muted transition hover:bg-elevated hover:text-ink md:hidden"
           >
             <svg
               width="20"
@@ -90,8 +90,8 @@ export function AppShell({ username, children }: { username: string; children: R
           <Sidebar />
         </div>
         {/* User chip — pinned at the bottom of the sidebar. */}
-        <div className="flex shrink-0 items-center gap-2.5 border-t border-neutral-200 px-3 py-3">
-          <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-neutral-100 text-neutral-600">
+        <div className="flex shrink-0 items-center gap-2.5 border-t border-line px-3 py-3">
+          <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-elevated text-ink-muted">
             <svg
               width="16"
               height="16"
@@ -107,7 +107,7 @@ export function AppShell({ username, children }: { username: string; children: R
               <circle cx="12" cy="7" r="4" />
             </svg>
           </span>
-          <span className="truncate text-sm font-medium text-neutral-700" title={username}>
+          <span className="truncate text-sm font-medium text-ink-muted" title={username}>
             {username}
           </span>
         </div>
@@ -115,13 +115,13 @@ export function AppShell({ username, children }: { username: string; children: R
 
       <main className="flex min-w-0 flex-1 flex-col overflow-hidden">
         {/* Mobile top bar — sidebar toggle. Hidden on md+ (persistent sidebar). */}
-        <div className="flex shrink-0 items-center gap-2 border-b border-neutral-200 bg-white px-3 py-2 md:hidden">
+        <div className="flex shrink-0 items-center gap-2 border-b border-line bg-surface px-3 py-2 md:hidden">
           <button
             type="button"
             aria-label={text.shell.openMenu}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
-            className="grid h-9 w-9 place-items-center rounded-lg text-neutral-700 transition hover:bg-neutral-100"
+            className="grid h-9 w-9 place-items-center rounded-lg text-ink-muted transition hover:bg-elevated hover:text-ink"
           >
             <svg
               width="22"
@@ -139,7 +139,7 @@ export function AppShell({ username, children }: { username: string; children: R
               <line x1="3" x2="21" y1="18" y2="18" />
             </svg>
           </button>
-          <Link href="/" className="font-display text-sm text-neutral-900">
+          <Link href="/" className="font-display text-sm text-ink">
             {text.common.brand}
           </Link>
         </div>

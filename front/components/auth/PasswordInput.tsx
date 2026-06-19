@@ -32,14 +32,14 @@ export function PasswordInput(props: Omit<InputHTMLAttributes<HTMLInputElement>,
       <input
         {...props}
         type={show ? "text" : "password"}
-        className="w-full rounded-lg border border-neutral-300 px-3 py-2 pr-10 outline-hidden focus:border-neutral-400"
+        className="w-full rounded-lg border border-line bg-elevated px-3 py-2 pr-10 text-ink outline-hidden focus:border-accent"
       />
       <button
         type="button"
         onClick={() => setShow((s) => !s)}
         aria-label={show ? text.auth.passwordInput.hide : text.auth.passwordInput.show}
         aria-pressed={show}
-        className="absolute inset-y-0 right-0 flex items-center px-3 text-neutral-400 transition hover:text-neutral-700"
+        className="absolute inset-y-0 right-0 flex items-center px-3 text-ink-faint transition hover:text-ink"
       >
         {show ? (
           <Svg>

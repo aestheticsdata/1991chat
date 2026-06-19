@@ -71,7 +71,7 @@ function NavLink({ href, active, children }: { href: string; active: boolean; ch
     <Link
       href={href}
       className={`flex items-center gap-1.5 border-b-2 py-3 text-sm transition ${
-        active ? "border-neutral-900 text-neutral-900" : "border-transparent text-neutral-500 hover:text-neutral-800"
+        active ? "border-accent text-ink" : "border-transparent text-ink-muted hover:text-ink"
       }`}
     >
       {children}
@@ -97,7 +97,7 @@ export function SiteHeader() {
   }
 
   return (
-    <header className="border-b border-neutral-200 bg-white">
+    <header className="border-b border-line bg-surface">
       <nav className="mx-auto flex max-w-5xl items-center gap-6 px-4">
         {user ? (
           <>
@@ -113,7 +113,7 @@ export function SiteHeader() {
             <button
               type="button"
               onClick={signOut}
-              className="ml-auto flex items-center gap-1.5 py-3 text-sm text-neutral-500 transition hover:text-neutral-800"
+              className="ml-auto flex items-center gap-1.5 py-3 text-sm text-ink-muted transition hover:text-ink"
             >
               <LogoutIcon /> {text.nav.signOut}
             </button>

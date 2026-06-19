@@ -16,7 +16,7 @@ export default async function ContentLayout({ children }: { children: ReactNode 
 
   if (!user) {
     return (
-      <div className="flex min-h-screen flex-col bg-neutral-50">
+      <div className="flex min-h-screen flex-col bg-canvas">
         <SiteHeader />
         {children}
       </div>

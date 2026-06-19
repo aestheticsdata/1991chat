@@ -1,0 +1,36 @@
+/*
+ * Color tokens — dark "military blue" theme.
+ *
+ * Desaturated steel/navy surfaces in the spirit of Claude Code's dark UI, but
+ * monochrome-blue. Defined as a Tailwind v4 `@theme` block: each `--color-*`
+ * here generates the matching utilities (`bg-surface`, `text-ink`, `border-line`,
+ * `bg-accent`, …). This file is the single source of truth for the palette —
+ * change a value here and it propagates everywhere. Imported from globals.css.
+ *
+ * Surface hierarchy (lift → recede):
+ *   elevated  hover rows, the composer input      #1d2c3d
+ *   surface   the sidebar panel                   #15212f
+ *   canvas    chat display + composer area        #0c1521
+ *
+ * The composer/prompt has NO bar background and no top border — only the input
+ * field (elevated) and the send button sit on the canvas.
+ */
+@theme {
+  /* Surfaces */
+  --color-canvas: #0c1521;
+  --color-surface: #15212f;
+  --color-elevated: #1d2c3d;
+
+  /* Hairlines / borders */
+  --color-line: #26384c;
+
+  /* Text */
+  --color-ink: #e2e9f0;
+  --color-ink-muted: #94a6ba;
+  --color-ink-faint: #647a8f;
+
+  /* Accent — steel blue, kept in the military-blue family */
+  --color-accent: #3f719f;
+  --color-accent-strong: #4a82b4;
+  --color-on-accent: #ffffff;
+}

@@ -15,14 +15,14 @@ export function Prompt() {
       <textarea
         rows={1}
         placeholder={text.chat.composerPlaceholder}
-        className="max-h-48 min-h-[44px] flex-1 resize-none rounded-2xl border border-neutral-300 bg-white px-4 py-2.5 outline-hidden focus:border-neutral-400 focus:ring-2 focus:ring-neutral-200"
+        className="max-h-48 min-h-[44px] flex-1 resize-none rounded-2xl border border-line bg-elevated px-4 py-2.5 text-ink outline-hidden focus:border-accent focus:ring-2 focus:ring-accent/30"
       />
 
       {/* Play ▶ when idle; swap to Stop ■ while streaming. */}
       <button
         type="submit"
         aria-label={text.chat.send}
-        className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-neutral-900 text-white transition hover:bg-neutral-700 disabled:opacity-40"
+        className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-accent text-on-accent transition hover:bg-accent-strong disabled:opacity-40"
       >
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M8 5v14l11-7z" />
