@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { PasswordInput } from "@components/auth/PasswordInput";
 import { SiteHeader } from "@components/SiteHeader";
 import { useAuth } from "@lib/auth-context";
+import { text } from "@i18n";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -33,7 +34,7 @@ export default function LoginPage() {
       router.refresh();
     } else {
       const data = await res.json().catch(() => ({}));
-      setError(typeof data.message === "string" ? data.message : "Login failed");
+      setError(typeof data.message === "string" ? data.message : text.auth.login.error);
     }
   }
 
@@ -42,11 +43,11 @@ export default function LoginPage() {
       <SiteHeader />
       <div className="grid flex-1 place-items-center p-4">
         <form onSubmit={onSubmit} className="w-80 rounded-2xl border border-neutral-200 bg-white p-6 shadow-xs">
-          <h1 className="mb-1 font-display text-xl">1991CHAT</h1>
-          <p className="mb-5 text-sm text-neutral-500">Sign in to continue</p>
+          <h1 className="mb-1 font-display text-xl">{text.common.brand}</h1>
+          <p className="mb-5 text-sm text-neutral-500">{text.auth.login.title}</p>
 
           <label htmlFor="username" className="mb-3 block text-sm">
-            <span className="mb-1 block text-neutral-600">Username</span>
+            <span className="mb-1 block text-neutral-600">{text.auth.login.username}</span>
             <input
               id="username"
               name="username"
@@ -58,7 +59,7 @@ export default function LoginPage() {
           </label>
 
           <label htmlFor="password" className="mb-4 block text-sm">
-            <span className="mb-1 block text-neutral-600">Password</span>
+            <span className="mb-1 block text-neutral-600">{text.auth.login.password}</span>
             <PasswordInput
               id="password"
               name="password"
@@ -75,13 +76,13 @@ export default function LoginPage() {
             disabled={loading}
             className="w-full rounded-lg bg-neutral-900 px-4 py-2 text-white transition hover:bg-neutral-700 disabled:opacity-50"
           >
-            {loading ? "Signing in…" : "Sign in"}
+            {loading ? text.auth.login.submitLoading : text.auth.login.submit}
           </button>
 
           <p className="mt-4 text-center text-sm text-neutral-500">
-            No account?{" "}
+            {text.auth.login.noAccount}{" "}
             <Link href="/signup" className="text-neutral-900 underline hover:text-neutral-700">
-              Sign up
+              {text.auth.login.signupCta}
             </Link>
           </p>
         </form>

@@ -1,6 +1,7 @@
 import { AboutContent } from "@components/AboutContent";
+import { text } from "@i18n";
 
-export const metadata = { title: "About — 1991chat" };
+export const metadata = { title: text.meta.aboutTitle };
 
 /** Public. Centers the card; the shell layout supplies the surrounding frame
  *  (sidebar when signed in, header when signed out). */

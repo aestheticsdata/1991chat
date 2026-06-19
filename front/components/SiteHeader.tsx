@@ -1,5 +1,6 @@
 "use client";
 
+import { text } from "@i18n";
 import { apiFetch } from "@lib/api";
 import { useAuth } from "@lib/auth-context";
 import Link from "next/link";
@@ -101,32 +102,32 @@ export function SiteHeader() {
         {user ? (
           <>
             <NavLink href="/" active={pathname === "/"}>
-              <ChatIcon /> Chat
+              <ChatIcon /> {text.nav.chat}
             </NavLink>
             <NavLink href="/change-password" active={pathname === "/change-password"}>
-              <KeyIcon /> Change password
+              <KeyIcon /> {text.nav.changePassword}
             </NavLink>
             <NavLink href="/about" active={pathname === "/about"}>
-              <AboutIcon /> About
+              <AboutIcon /> {text.nav.about}
             </NavLink>
             <button
               type="button"
               onClick={signOut}
               className="ml-auto flex items-center gap-1.5 py-3 text-sm text-neutral-500 transition hover:text-neutral-800"
             >
-              <LogoutIcon /> Sign out
+              <LogoutIcon /> {text.nav.signOut}
             </button>
           </>
         ) : (
           <>
             <NavLink href="/login" active={pathname === "/login"}>
-              <LoginIcon /> Login
+              <LoginIcon /> {text.nav.login}
             </NavLink>
             <NavLink href="/signup" active={pathname === "/signup"}>
-              <SignupIcon /> Signup
+              <SignupIcon /> {text.nav.signup}
             </NavLink>
             <NavLink href="/about" active={pathname === "/about"}>
-              <AboutIcon /> About
+              <AboutIcon /> {text.nav.about}
             </NavLink>
           </>
         )}

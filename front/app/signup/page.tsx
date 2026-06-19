@@ -2,6 +2,7 @@
 
 import { PasswordInput } from "@components/auth/PasswordInput";
 import { SiteHeader } from "@components/SiteHeader";
+import { text } from "@i18n";
 import { useAuth } from "@lib/auth-context";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -20,7 +21,7 @@ export default function SignupPage() {
     event.preventDefault();
     setError(null);
     if (password !== confirm) {
-      setError("Passwords do not match");
+      setError(text.auth.signup.mismatch);
       return;
     }
     setLoading(true);
@@ -39,7 +40,7 @@ export default function SignupPage() {
     } else {
       const data = await res.json().catch(() => ({}));
       const message = Array.isArray(data.message) ? data.message[0] : data.message;
-      setError(typeof message === "string" ? message : "Sign up failed");
+      setError(typeof message === "string" ? message : text.auth.signup.error);
     }
   }
 
@@ -48,11 +49,11 @@ export default function SignupPage() {
       <SiteHeader />
       <div className="grid flex-1 place-items-center p-4">
         <form onSubmit={onSubmit} className="w-80 rounded-2xl border border-neutral-200 bg-white p-6 shadow-xs">
-          <h1 className="mb-1 text-xl font-semibold">Create your account</h1>
-          <p className="mb-5 text-sm text-neutral-500">Sign up to start chatting</p>
+          <h1 className="mb-1 text-xl font-semibold">{text.auth.signup.heading}</h1>
+          <p className="mb-5 text-sm text-neutral-500">{text.auth.signup.subtitle}</p>
 
           <label className="mb-3 block text-sm">
-            <span className="mb-1 block text-neutral-600">Username</span>
+            <span className="mb-1 block text-neutral-600">{text.auth.signup.username}</span>
             <input
               value={username}
               onChange={(e) => setUsername(e.target.value)}
@@ -62,12 +63,12 @@ export default function SignupPage() {
           </label>
 
           <label className="mb-3 block text-sm">
-            <span className="mb-1 block text-neutral-600">Password</span>
+            <span className="mb-1 block text-neutral-600">{text.auth.signup.password}</span>
             <PasswordInput value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="new-password" />
           </label>
 
           <label className="mb-4 block text-sm">
-            <span className="mb-1 block text-neutral-600">Confirm password</span>
+            <span className="mb-1 block text-neutral-600">{text.auth.signup.confirmPassword}</span>
             <PasswordInput value={confirm} onChange={(e) => setConfirm(e.target.value)} autoComplete="new-password" />
           </label>
 
@@ -78,13 +79,13 @@ export default function SignupPage() {
             disabled={loading}
             className="w-full rounded-lg bg-neutral-900 px-4 py-2 text-white transition hover:bg-neutral-700 disabled:opacity-50"
           >
-            {loading ? "Creating account…" : "Sign up"}
+            {loading ? text.auth.signup.submitLoading : text.auth.signup.submit}
           </button>
 
           <p className="mt-4 text-center text-sm text-neutral-500">
-            Already have an account?{" "}
+            {text.auth.signup.haveAccount}{" "}
             <Link href="/login" className="text-neutral-900 underline hover:text-neutral-700">
-              Log in
+              {text.auth.signup.loginCta}
             </Link>
           </p>
         </form>

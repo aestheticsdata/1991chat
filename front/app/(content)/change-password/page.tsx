@@ -1,8 +1,9 @@
 import { redirect } from "next/navigation";
 import { ChangePasswordForm } from "@components/auth/ChangePasswordForm";
+import { text } from "@i18n";
 import { getServerUser } from "@lib/session";
 
-export const metadata = { title: "Change password — 1991chat" };
+export const metadata = { title: text.meta.changePasswordTitle };
 
 /** Members-only. The shell layout provides the sidebar around this. */
 export default async function ChangePasswordPage() {

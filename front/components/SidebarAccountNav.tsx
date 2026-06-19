@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type { ReactNode } from "react";
+import { text } from "@i18n";
 import { apiFetch } from "@lib/api";
 import { useAuth } from "@lib/auth-context";
 
@@ -51,7 +52,7 @@ export function SidebarAccountNav() {
           <path d="m21 2-9.6 9.6" />
           <path d="m15.5 7.5 3 3L22 7l-3-3" />
         </Svg>
-        Change password
+        {text.nav.changePassword}
       </Link>
 
       <Link href="/about" className={ROW}>
@@ -60,7 +61,7 @@ export function SidebarAccountNav() {
           <path d="M12 16v-4" />
           <path d="M12 8h.01" />
         </Svg>
-        About
+        {text.nav.about}
       </Link>
 
       <button type="button" onClick={signOut} className={ROW}>
@@ -69,7 +70,7 @@ export function SidebarAccountNav() {
           <polyline points="16 17 21 12 16 7" />
           <line x1="21" x2="9" y1="12" y2="12" />
         </Svg>
-        Sign out
+        {text.nav.signOut}
       </button>
     </nav>
   );

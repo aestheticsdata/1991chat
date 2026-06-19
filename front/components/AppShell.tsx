@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { type ReactNode, useEffect, useState } from "react";
 import { Sidebar } from "@components/Sidebar";
 import { SidebarAccountNav } from "@components/SidebarAccountNav";
+import { text } from "@i18n";
 
 /**
  * Signed-in shell. Tablet/desktop (md+) keep the persistent sidebar untouched.
@@ -47,7 +48,7 @@ export function AppShell({ username, children }: { username: string; children: R
       {open && (
         <button
           type="button"
-          aria-label="Close menu"
+          aria-label={text.shell.closeMenu}
           onClick={() => setOpen(false)}
           className="fixed inset-0 z-30 bg-neutral-900/40 md:hidden"
         />
@@ -60,11 +61,11 @@ export function AppShell({ username, children }: { username: string; children: R
       >
         <div className="flex items-center justify-between border-b border-neutral-200 px-4 py-3">
           <Link href="/" className="font-display text-base text-neutral-900 transition hover:text-neutral-600">
-            1991CHAT
+            {text.common.brand}
           </Link>
           <button
             type="button"
-            aria-label="Close menu"
+            aria-label={text.shell.closeMenu}
             onClick={() => setOpen(false)}
             className="-mr-1 grid h-8 w-8 place-items-center rounded-lg text-neutral-500 transition hover:bg-neutral-100 hover:text-neutral-900 md:hidden"
           >
@@ -117,7 +118,7 @@ export function AppShell({ username, children }: { username: string; children: R
         <div className="flex shrink-0 items-center gap-2 border-b border-neutral-200 bg-white px-3 py-2 md:hidden">
           <button
             type="button"
-            aria-label="Open menu"
+            aria-label={text.shell.openMenu}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
             className="grid h-9 w-9 place-items-center rounded-lg text-neutral-700 transition hover:bg-neutral-100"
@@ -139,7 +140,7 @@ export function AppShell({ username, children }: { username: string; children: R
             </svg>
           </button>
           <Link href="/" className="font-display text-sm text-neutral-900">
-            1991CHAT
+            {text.common.brand}
           </Link>
         </div>
         {children}

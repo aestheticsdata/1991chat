@@ -1,5 +1,6 @@
 "use client";
 
+import { text } from "@i18n";
 import { type InputHTMLAttributes, type ReactNode, useState } from "react";
 
 function Svg({ children }: { children: ReactNode }) {
@@ -36,7 +37,7 @@ export function PasswordInput(props: Omit<InputHTMLAttributes<HTMLInputElement>,
       <button
         type="button"
         onClick={() => setShow((s) => !s)}
-        aria-label={show ? "Hide password" : "Show password"}
+        aria-label={show ? text.auth.passwordInput.hide : text.auth.passwordInput.show}
         aria-pressed={show}
         className="absolute inset-y-0 right-0 flex items-center px-3 text-neutral-400 transition hover:text-neutral-700"
       >

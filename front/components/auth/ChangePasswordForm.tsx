@@ -1,6 +1,7 @@
 "use client";
 
 import { PasswordInput } from "@components/auth/PasswordInput";
+import { text } from "@i18n";
 import { apiFetch } from "@lib/api";
 import { type FormEvent, useState } from "react";
 
@@ -23,7 +24,7 @@ export function ChangePasswordForm({ username }: { username: string }) {
     setError(null);
     setDone(false);
     if (newPassword !== confirm) {
-      setError("New passwords do not match");
+      setError(text.auth.changePassword.mismatch);
       return;
     }
     setLoading(true);
@@ -40,17 +41,17 @@ export function ChangePasswordForm({ username }: { username: string }) {
     } else {
       const data = await res.json().catch(() => ({}));
       const message = Array.isArray(data.message) ? data.message[0] : data.message;
-      setError(typeof message === "string" ? message : "Could not change password");
+      setError(typeof message === "string" ? message : text.auth.changePassword.error);
     }
   }
 
   return (
     <form onSubmit={onSubmit} className="w-80 rounded-2xl border border-neutral-200 bg-white p-6 shadow-xs">
-      <h1 className="mb-1 text-xl font-semibold">Change password</h1>
-      <p className="mb-5 text-sm text-neutral-500">Update the password for your account</p>
+      <h1 className="mb-1 text-xl font-semibold">{text.auth.changePassword.heading}</h1>
+      <p className="mb-5 text-sm text-neutral-500">{text.auth.changePassword.subtitle}</p>
 
       <label className="mb-3 block text-sm">
-        <span className="mb-1 block text-neutral-600">Username</span>
+        <span className="mb-1 block text-neutral-600">{text.auth.changePassword.username}</span>
         <input
           value={username}
           readOnly
@@ -60,7 +61,7 @@ export function ChangePasswordForm({ username }: { username: string }) {
       </label>
 
       <label className="mb-3 block text-sm">
-        <span className="mb-1 block text-neutral-600">Current password</span>
+        <span className="mb-1 block text-neutral-600">{text.auth.changePassword.currentPassword}</span>
         <PasswordInput
           value={currentPassword}
           onChange={(e) => setCurrentPassword(e.target.value)}
@@ -69,7 +70,7 @@ export function ChangePasswordForm({ username }: { username: string }) {
       </label>
 
       <label className="mb-3 block text-sm">
-        <span className="mb-1 block text-neutral-600">New password</span>
+        <span className="mb-1 block text-neutral-600">{text.auth.changePassword.newPassword}</span>
         <PasswordInput
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
@@ -78,19 +79,19 @@ export function ChangePasswordForm({ username }: { username: string }) {
       </label>
 
       <label className="mb-4 block text-sm">
-        <span className="mb-1 block text-neutral-600">Confirm new password</span>
+        <span className="mb-1 block text-neutral-600">{text.auth.changePassword.confirmPassword}</span>
         <PasswordInput value={confirm} onChange={(e) => setConfirm(e.target.value)} autoComplete="new-password" />
       </label>
 
       {error && <p className="mb-3 text-sm text-red-600">{error}</p>}
-      {done && <p className="mb-3 text-sm text-green-600">Password changed.</p>}
+      {done && <p className="mb-3 text-sm text-green-600">{text.auth.changePassword.success}</p>}
 
       <button
         type="submit"
         disabled={loading}
         className="w-full rounded-lg bg-neutral-900 px-4 py-2 text-white transition hover:bg-neutral-700 disabled:opacity-50"
       >
-        {loading ? "Saving…" : "Change password"}
+        {loading ? text.auth.changePassword.submitLoading : text.auth.changePassword.submit}
       </button>
     </form>
   );
