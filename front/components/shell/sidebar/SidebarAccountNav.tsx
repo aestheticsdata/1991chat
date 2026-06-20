@@ -31,7 +31,7 @@ function Svg({ children }: { children: ReactNode }) {
 /**
  * Account actions for the chat sidebar — change password, about, sign out, as a
  * tidy menu group. The username itself lives in the user chip at the bottom of
- * the sidebar (see AppShell), not here.
+ * the sidebar (see SidebarUserChip), not here.
  */
 export function SidebarAccountNav() {
   const router = useRouter();

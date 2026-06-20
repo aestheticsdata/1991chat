@@ -1,5 +1,5 @@
-import { AppShell } from "@components/AppShell";
 import { SiteHeader } from "@components/SiteHeader";
+import { AppShell } from "@components/shell/AppShell";
 import { getServerUser } from "@lib/session";
 import type { ReactNode } from "react";
 
@@ -23,8 +23,5 @@ export default async function ContentLayout({ children }: { children: ReactNode 
     );
   }
 
-  return (
-    <AppShell username={user.username}>
-      {children}
-    </AppShell>);
+  return <AppShell username={user.username}>{children}</AppShell>;
 }
