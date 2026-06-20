@@ -1,7 +1,7 @@
-import { redirect } from "next/navigation";
 import { ChatDisplay } from "@components/ChatDisplay";
 import { Prompt } from "@components/Prompt";
 import { getServerUser } from "@lib/session";
+import { redirect } from "next/navigation";
 
 /**
  * Chat view — fills the shell's <main>. Members-only: redirect to /login when

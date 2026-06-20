@@ -1,7 +1,8 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import { setCsrfToken } from "@lib/api";
+import type { ReactNode } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 export interface AuthUser {
   id: string;

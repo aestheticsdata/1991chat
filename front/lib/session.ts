@@ -1,5 +1,5 @@
-import { cookies } from "next/headers";
 import { BACKEND_URL } from "@lib/backend";
+import { cookies } from "next/headers";
 
 export interface ServerUser {
   id: string;

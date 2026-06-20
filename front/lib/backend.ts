@@ -1,4 +1,4 @@
-import { NextRequest } from "next/server";
+import type { NextRequest } from "next/server";
 
 /** The NestJS backend the BFF proxies to. Server-side only. */
 export const BACKEND_URL = process.env.BACKEND_URL ?? "http://localhost:6400";

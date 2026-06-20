@@ -1,12 +1,13 @@
 "use client";
 
-import { FormEvent, useState } from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { PasswordInput } from "@components/auth/PasswordInput";
 import { SiteHeader } from "@components/SiteHeader";
-import { useAuth } from "@lib/auth-context";
 import { text } from "@i18n";
+import { useAuth } from "@lib/auth-context";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import type { FormEvent } from "react";
+import { useState } from "react";
 
 export default function LoginPage() {
   const router = useRouter();

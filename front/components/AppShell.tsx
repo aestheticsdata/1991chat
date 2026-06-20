@@ -1,11 +1,12 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { type ReactNode, useEffect, useState } from "react";
 import { Sidebar } from "@components/Sidebar";
 import { SidebarAccountNav } from "@components/SidebarAccountNav";
 import { text } from "@i18n";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import type { ReactNode } from "react";
+import { useEffect, useState } from "react";
 
 /**
  * Signed-in shell. Tablet/desktop (md+) keep the persistent sidebar untouched.

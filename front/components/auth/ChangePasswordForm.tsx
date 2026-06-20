@@ -3,7 +3,8 @@
 import { PasswordInput } from "@components/auth/PasswordInput";
 import { text } from "@i18n";
 import { apiFetch } from "@lib/api";
-import { type FormEvent, useState } from "react";
+import type { FormEvent } from "react";
+import { useState } from "react";
 
 /**
  * Change-password form. Identity comes from the session server-side, so the

@@ -1,7 +1,8 @@
 "use client";
 
 import { text } from "@i18n";
-import { type InputHTMLAttributes, type ReactNode, useState } from "react";
+import type { InputHTMLAttributes, ReactNode } from "react";
+import { useState } from "react";
 
 function Svg({ children }: { children: ReactNode }) {
   return (

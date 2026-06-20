@@ -1,5 +1,5 @@
-import { NextRequest } from "next/server";
 import { proxy } from "@lib/backend";
+import type { NextRequest } from "next/server";
 
 type Ctx = { params: Promise<{ id: string }> };
 

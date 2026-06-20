@@ -1,7 +1,7 @@
-import type { ReactNode } from "react";
 import { AppShell } from "@components/AppShell";
 import { SiteHeader } from "@components/SiteHeader";
 import { getServerUser } from "@lib/session";
+import type { ReactNode } from "react";
 
 /**
  * Shell for the main content routes (chat · about · change-password). Auth-aware:

@@ -1,7 +1,7 @@
-import { redirect } from "next/navigation";
 import { ChangePasswordForm } from "@components/auth/ChangePasswordForm";
 import { text } from "@i18n";
 import { getServerUser } from "@lib/session";
+import { redirect } from "next/navigation";
 
 export const metadata = { title: text.meta.changePasswordTitle };
 
