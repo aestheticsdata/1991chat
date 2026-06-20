@@ -22,7 +22,7 @@ export function Prompt() {
       <button
         type="submit"
         aria-label={text.chat.send}
-        className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-accent text-on-accent transition hover:bg-accent-strong disabled:opacity-40"
+        className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-accent text-on-accent transition hover:bg-accent-strong disabled:opacity-40 cursor-pointer"
       >
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M8 5v14l11-7z" />

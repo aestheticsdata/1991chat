@@ -23,5 +23,8 @@ export default async function ContentLayout({ children }: { children: ReactNode 
     );
   }
 
-  return <AppShell username={user.username}>{children}</AppShell>;
+  return (
+    <AppShell username={user.username}>
+      {children}
+    </AppShell>);
 }

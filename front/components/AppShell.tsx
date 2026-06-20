@@ -15,11 +15,11 @@ import { useEffect, useState } from "react";
  * the scrim, a nav, or Escape — so the chat and prompt fill the whole screen.
  *
  *   mobile (closed)            mobile (open)
- *   ┌──────────────┐           ┌───────────┲━━━━┓
- *   │ ☰  1991CHAT  │           │ drawer 80%┃scrim┃
- *   │ chat …       │           │           ┃    ┃
- *   │ prompt …     │           │           ┃    ┃
- *   └──────────────┘           └───────────┺━━━━┛
+ *   ┌──────────────┐           ┌───────────━┲━━━━━┓
+ *   │ ☰  1991CHAT  │           │ drawer 80% ┃scrim┃
+ *   │ chat …      │           │            ┃     ┃
+ *   │ prompt …    │           │            ┃     ┃
+ *   └──────────────┘           └───────────━┺━━━━━┛
  */
 export function AppShell({ username, children }: { username: string; children: ReactNode }) {
   const [open, setOpen] = useState(false);
