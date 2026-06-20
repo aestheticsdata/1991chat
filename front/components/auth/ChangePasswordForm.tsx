@@ -3,7 +3,7 @@
 import { PasswordInput } from "@components/auth/PasswordInput";
 import { text } from "@i18n";
 import { apiFetch } from "@lib/api";
-import type { FormEvent } from "react";
+import type { SubmitEvent } from "react";
 import { useState } from "react";
 
 /**
@@ -20,7 +20,7 @@ export function ChangePasswordForm({ username }: { username: string }) {
   const [done, setDone] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  async function onSubmit(event: FormEvent) {
+  async function onSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
     setError(null);
     setDone(false);
