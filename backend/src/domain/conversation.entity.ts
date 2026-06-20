@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { Message } from "@domain/message.entity";
+import type { Message } from "@domain/message.entity";
 
 /** Default title used until the first user message gives us something better. */
 export const UNTITLED_CONVERSATION = "New conversation";
