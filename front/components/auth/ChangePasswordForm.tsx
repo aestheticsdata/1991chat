@@ -51,9 +51,11 @@ export function ChangePasswordForm({ username }: { username: string }) {
       <h1 className="mb-1 text-xl font-semibold">{text.auth.changePassword.heading}</h1>
       <p className="mb-5 text-sm text-ink-muted">{text.auth.changePassword.subtitle}</p>
 
-      <label className="mb-3 block text-sm">
+      <label htmlFor="username" className="mb-3 block text-sm">
         <span className="mb-1 block text-ink-muted">{text.auth.changePassword.username}</span>
         <input
+          id="username"
+          name="username"
           value={username}
           readOnly
           autoComplete="username"
@@ -61,27 +63,37 @@ export function ChangePasswordForm({ username }: { username: string }) {
         />
       </label>
 
-      <label className="mb-3 block text-sm">
+      <label htmlFor="current-password" className="mb-3 block text-sm">
         <span className="mb-1 block text-ink-muted">{text.auth.changePassword.currentPassword}</span>
         <PasswordInput
+          id="current-password"
+          name="current-password"
           value={currentPassword}
           onChange={(e) => setCurrentPassword(e.target.value)}
           autoComplete="current-password"
         />
       </label>
 
-      <label className="mb-3 block text-sm">
+      <label htmlFor="new-password" className="mb-3 block text-sm">
         <span className="mb-1 block text-ink-muted">{text.auth.changePassword.newPassword}</span>
         <PasswordInput
+          id="new-password"
+          name="new-password"
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
           autoComplete="new-password"
         />
       </label>
 
-      <label className="mb-4 block text-sm">
+      <label htmlFor="confirm-password" className="mb-4 block text-sm">
         <span className="mb-1 block text-ink-muted">{text.auth.changePassword.confirmPassword}</span>
-        <PasswordInput value={confirm} onChange={(e) => setConfirm(e.target.value)} autoComplete="new-password" />
+        <PasswordInput
+          id="confirm-password"
+          name="confirm-password"
+          value={confirm}
+          onChange={(e) => setConfirm(e.target.value)}
+          autoComplete="new-password"
+        />
       </label>
 
       {error && <p className="mb-3 text-sm text-red-400">{error}</p>}

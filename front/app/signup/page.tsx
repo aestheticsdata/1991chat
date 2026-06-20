@@ -53,9 +53,11 @@ export default function SignupPage() {
           <h1 className="mb-1 text-xl font-semibold">{text.auth.signup.heading}</h1>
           <p className="mb-5 text-sm text-ink-muted">{text.auth.signup.subtitle}</p>
 
-          <label className="mb-3 block text-sm">
+          <label htmlFor="username" className="mb-3 block text-sm">
             <span className="mb-1 block text-ink-muted">{text.auth.signup.username}</span>
             <input
+              id="username"
+              name="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               autoComplete="username"
@@ -63,14 +65,26 @@ export default function SignupPage() {
             />
           </label>
 
-          <label className="mb-3 block text-sm">
+          <label htmlFor="password" className="mb-3 block text-sm">
             <span className="mb-1 block text-ink-muted">{text.auth.signup.password}</span>
-            <PasswordInput value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="new-password" />
+            <PasswordInput
+              id="password"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              autoComplete="new-password"
+            />
           </label>
 
-          <label className="mb-4 block text-sm">
+          <label htmlFor="confirm-password" className="mb-4 block text-sm">
             <span className="mb-1 block text-ink-muted">{text.auth.signup.confirmPassword}</span>
-            <PasswordInput value={confirm} onChange={(e) => setConfirm(e.target.value)} autoComplete="new-password" />
+            <PasswordInput
+              id="confirm-password"
+              name="confirm-password"
+              value={confirm}
+              onChange={(e) => setConfirm(e.target.value)}
+              autoComplete="new-password"
+            />
           </label>
 
           {error && <p className="mb-3 text-sm text-red-400">{error}</p>}
