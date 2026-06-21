@@ -87,7 +87,7 @@ export default function SignupPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-lg bg-accent px-4 py-2 text-on-accent transition hover:bg-accent-strong disabled:opacity-50"
+            className="w-full rounded-lg bg-accent px-4 py-2 text-on-accent transition hover:bg-accent-strong disabled:opacity-50 cursor-pointer"
           >
             {loading ? text.auth.signup.submitLoading : text.auth.signup.submit}
           </button>
