@@ -22,8 +22,8 @@
       "@app/*": ["./app/*"],
       "@components/*": ["./components/*"],
       "@lib/*": ["./lib/*"],
-      "@i18n": ["./i18n"],
-      "@i18n/*": ["./i18n/*"]
+      "@services/*": ["./services/*"],
+      "@i18n": ["./i18n"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", ".next/dev/types/**/*.ts"],

@@ -2,7 +2,8 @@
 
 import { PasswordInput } from "@components/auth/PasswordInput";
 import { text } from "@i18n";
-import { apiFetch } from "@lib/api";
+import { authService } from "@services/auth.service";
+import { ApiError } from "@services/http/errors";
 import type { SubmitEvent } from "react";
 import { useState } from "react";
 
@@ -10,7 +11,7 @@ import { useState } from "react";
  * Change-password form. Identity comes from the session server-side, so the
  * username is shown read-only (for confirmation) and not submitted. "Confirm new
  * password" is a client-only match check. A wrong current password returns 400
- * (handled here); a 401 means the session expired and apiFetch redirects to login.
+ * (handled here); a 401 means the session expired and the HTTP client redirects to login.
  */
 export function ChangePasswordForm({ username }: { username: string }) {
   const [currentPassword, setCurrentPassword] = useState("");
@@ -29,20 +30,16 @@ export function ChangePasswordForm({ username }: { username: string }) {
       return;
     }
     setLoading(true);
-    const res = await apiFetch("/auth/change-password", {
-      method: "POST",
-      body: JSON.stringify({ currentPassword, newPassword }),
-    });
-    setLoading(false);
-    if (res.ok) {
+    try {
+      await authService.changePassword(currentPassword, newPassword);
       setDone(true);
       setCurrentPassword("");
       setNewPassword("");
       setConfirm("");
-    } else {
-      const data = await res.json().catch(() => ({}));
-      const message = Array.isArray(data.message) ? data.message[0] : data.message;
-      setError(typeof message === "string" ? message : text.auth.changePassword.error);
+    } catch (err) {
+      setError(err instanceof ApiError ? err.message : text.auth.changePassword.error);
+    } finally {
+      setLoading(false);
     }
   }
 

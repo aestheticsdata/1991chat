@@ -1,8 +1,8 @@
 "use client";
 
 import { text } from "@i18n";
-import { apiFetch } from "@lib/api";
 import { useAuth } from "@lib/auth-context";
+import { authService } from "@services/auth.service";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type { ReactNode } from "react";
@@ -38,7 +38,11 @@ export function SidebarAccountNav() {
   const { clearAuth } = useAuth();
 
   async function signOut() {
-    await apiFetch("/auth/logout", { method: "POST" });
+    try {
+      await authService.logout();
+    } catch {
+      // Best-effort: clear the local session and redirect even if the call fails.
+    }
     clearAuth();
     router.replace("/login");
     router.refresh();

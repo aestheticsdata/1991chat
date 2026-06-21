@@ -1,13 +1,12 @@
 "use client";
 
-import { setCsrfToken } from "@lib/api";
+import { authService } from "@services/auth.service";
+import type { AuthUser } from "@services/auth.types";
+import { setCsrfToken } from "@services/http/csrf";
 import type { ReactNode } from "react";
 import { createContext, useContext, useEffect, useState } from "react";
 
-export interface AuthUser {
-  id: string;
-  username: string;
-}
+export type { AuthUser };
 
 interface AuthContextValue {
   user: AuthUser | null;
@@ -29,21 +28,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    let active = true;
-    fetch("/api/auth/me", { credentials: "same-origin" })
-      .then(async (res) => {
-        if (!active || !res.ok) return;
-        const data = (await res.json()) as { user: AuthUser; csrfToken: string };
-        setUser(data.user);
-        setCsrfToken(data.csrfToken ?? null);
-      })
-      .catch(() => undefined)
-      .finally(() => {
-        if (active) setLoading(false);
-      });
-    return () => {
-      active = false;
-    };
+    const controller = new AbortController();
+    async function hydrate() {
+      try {
+        const session = await authService.me(controller.signal);
+        if (!controller.signal.aborted && session) {
+          setUser(session.user);
+          setCsrfToken(session.csrfToken);
+        }
+      } finally {
+        if (!controller.signal.aborted) setLoading(false);
+      }
+    }
+    hydrate();
+    return () => controller.abort();
   }, []);
 
   function setAuth(nextUser: AuthUser, csrfToken: string) {

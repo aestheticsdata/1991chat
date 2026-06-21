@@ -4,6 +4,8 @@ import { PasswordInput } from "@components/auth/PasswordInput";
 import { SiteHeader } from "@components/SiteHeader";
 import { text } from "@i18n";
 import { useAuth } from "@lib/auth-context";
+import { authService } from "@services/auth.service";
+import { ApiError } from "@services/http/errors";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type { SubmitEvent } from "react";
@@ -21,21 +23,15 @@ export default function LoginPage() {
     event.preventDefault();
     setLoading(true);
     setError(null);
-    const res = await fetch("/api/auth/login", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      credentials: "same-origin",
-      body: JSON.stringify({ username, password }),
-    });
-    setLoading(false);
-    if (res.ok) {
-      const data = (await res.json()) as { user: { id: string; username: string }; csrfToken: string };
-      setAuth(data.user, data.csrfToken);
+    try {
+      const { user, csrfToken } = await authService.login(username, password);
+      setAuth(user, csrfToken);
       router.replace("/");
       router.refresh();
-    } else {
-      const data = await res.json().catch(() => ({}));
-      setError(typeof data.message === "string" ? data.message : text.auth.login.error);
+    } catch (err) {
+      setError(err instanceof ApiError ? err.message : text.auth.login.error);
+    } finally {
+      setLoading(false);
     }
   }
 

@@ -4,6 +4,8 @@ import { PasswordInput } from "@components/auth/PasswordInput";
 import { SiteHeader } from "@components/SiteHeader";
 import { text } from "@i18n";
 import { useAuth } from "@lib/auth-context";
+import { authService } from "@services/auth.service";
+import { ApiError } from "@services/http/errors";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type { SubmitEvent } from "react";
@@ -26,22 +28,15 @@ export default function SignupPage() {
       return;
     }
     setLoading(true);
-    const res = await fetch("/api/auth/register", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      credentials: "same-origin",
-      body: JSON.stringify({ username, password }),
-    });
-    setLoading(false);
-    if (res.ok) {
-      const data = (await res.json()) as { user: { id: string; username: string }; csrfToken: string };
-      setAuth(data.user, data.csrfToken);
+    try {
+      const { user, csrfToken } = await authService.register(username, password);
+      setAuth(user, csrfToken);
       router.replace("/");
       router.refresh();
-    } else {
-      const data = await res.json().catch(() => ({}));
-      const message = Array.isArray(data.message) ? data.message[0] : data.message;
-      setError(typeof message === "string" ? message : text.auth.signup.error);
+    } catch (err) {
+      setError(err instanceof ApiError ? err.message : text.auth.signup.error);
+    } finally {
+      setLoading(false);
     }
   }
 

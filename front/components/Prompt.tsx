@@ -1,12 +1,15 @@
 // Prompt — the composer. The layout (textarea + play/stop button) is provided;
 // the behaviour is yours.
-// TODO (you): controlled textarea state, then submit with the CSRF-aware helper:
-//   import { apiFetch } from '@lib/api';
-//   const res = await apiFetch('/chat', { method: 'POST',
-//     body: JSON.stringify({ conversationId, content }) });
-//   const reader = res.body!.getReader(); // consume the SSE token stream
-// Pass an AbortController signal to apiFetch's init to wire the stop button;
-// swap the play icon for a stop icon while streaming.
+// TODO (you): controlled textarea state, then submit via the chat service, which
+// streams the reply over SSE (CSRF + auth handled for you):
+//   import { chatService } from "@services/chat.service";
+//   const controller = new AbortController();
+//   for await (const ev of chatService.streamMessage(
+//     { conversationId, content }, { signal: controller.signal })) {
+//     if (ev.type === "delta") append(ev.delta); // also: "open" | "done" | "error"
+//   }
+// Call controller.abort() from the stop button; swap the play icon for a stop
+// icon while streaming.
 import { text } from "@i18n";
 
 export function Prompt() {

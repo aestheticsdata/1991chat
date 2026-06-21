@@ -1,8 +1,10 @@
 // Sidebar — conversation list + "new chat".
-// TODO (you): use apiFetch from '@lib/api' — apiFetch('/conversations') to list,
-// apiFetch('/conversations', { method: 'POST', body: '{}' }) to create,
-// apiFetch(`/conversations/${id}`, { method: 'DELETE' }) to delete. The current
-// user is available via useAuth() from '@lib/auth-context'.
+// TODO (you): use the conversation service (CSRF + auth handled for you):
+//   import { conversationService } from "@services/conversation.service";
+//   conversationService.list();         // list conversations
+//   conversationService.create(title?); // new chat
+//   conversationService.remove(id);     // delete
+// The current user is available via useAuth() from "@lib/auth-context".
 import { text } from "@i18n";
 
 export function Sidebar() {
