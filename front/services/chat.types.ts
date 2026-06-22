@@ -8,11 +8,12 @@ export interface SendMessageInput {
 }
 
 /**
- * A parsed chat SSE event. The backend frames the stream as: an `open` event,
- * a run of unnamed token deltas, then a terminal `done` or `error`.
+ * A parsed chat SSE event. The backend frames the stream as: an `open` event
+ * (carrying the persisted user + assistant message ids), a run of unnamed token
+ * deltas, then a terminal `done` or `error`.
  */
 export type ChatStreamEvent =
-  | { type: "open" }
+  | { type: "open"; userMessageId: string; assistantMessageId: string }
   | { type: "delta"; delta: string }
   | { type: "done" }
   | { type: "error"; message: string };

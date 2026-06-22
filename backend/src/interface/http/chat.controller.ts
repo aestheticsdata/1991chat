@@ -34,6 +34,9 @@ export class ChatController {
     const abort = new AbortController();
     req.on("close", () => abort.abort());
 
-    await writeSse(res, this.streamChat.stream(turn, abort.signal));
+    await writeSse(res, this.streamChat.stream(turn, abort.signal), {
+      userMessageId: turn.userMessage.id,
+      assistantMessageId: turn.assistant.id,
+    });
   }
 }

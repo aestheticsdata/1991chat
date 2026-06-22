@@ -24,12 +24,16 @@ function frame(event: string | null, data: unknown): string {
  * it directly.
  *
  * Events:
- *   open   { status: 'pending' }   sent immediately (lets the UI show "thinking")
+ *   open   { status: 'pending', userMessageId, assistantMessageId }   sent immediately
  *   <data> { delta: '...' }        one per token chunk
  *   done   { status: 'complete' }  clean end
  *   error  { status: 'error', message }  the provider threw mid-stream
  */
-export async function writeSse(res: SseResponse, stream: AsyncIterable<TokenChunk>): Promise<void> {
+export async function writeSse(
+  res: SseResponse,
+  stream: AsyncIterable<TokenChunk>,
+  ids: { userMessageId: string; assistantMessageId: string },
+): Promise<void> {
   res.setHeader("Content-Type", "text/event-stream");
   res.setHeader("Cache-Control", "no-cache, no-transform");
   res.setHeader("Connection", "keep-alive");
@@ -38,7 +42,7 @@ export async function writeSse(res: SseResponse, stream: AsyncIterable<TokenChun
 
   // Flush an opening event so the client reacts before the first token — matters
   // for the long "pending" scenario.
-  res.write(frame("open", { status: MessageStatus.Pending }));
+  res.write(frame("open", { status: MessageStatus.Pending, ...ids }));
 
   try {
     for await (const chunk of stream) {

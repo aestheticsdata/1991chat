@@ -10,10 +10,11 @@ export interface StreamChatCommand {
   content: string;
 }
 
-/** Everything the streaming phase needs, prepared synchronously up front. */
+/** Everything the response phase needs, prepared synchronously up front. */
 export interface ChatTurn {
   conversation: Conversation;
   prompt: ChatPrompt;
+  userMessage: Message;
   assistant: Message;
 }
 
@@ -53,6 +54,7 @@ export class StreamChatUseCase {
     return {
       conversation,
       prompt: { messages: history },
+      userMessage,
       assistant: Message.assistantPending(conversation.id),
     };
   }

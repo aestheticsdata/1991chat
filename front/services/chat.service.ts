@@ -31,7 +31,12 @@ export const chatService = {
 
     for await (const frame of readSse(res)) {
       if (frame.event === "open") {
-        yield { type: "open" };
+        const { userMessageId, assistantMessageId } = parseData(frame.data);
+        yield {
+          type: "open",
+          userMessageId: typeof userMessageId === "string" ? userMessageId : "",
+          assistantMessageId: typeof assistantMessageId === "string" ? assistantMessageId : "",
+        };
       } else if (frame.event === "done") {
         yield { type: "done" };
       } else if (frame.event === "error") {
@@ -45,9 +50,19 @@ export const chatService = {
   },
 };
 
-function parseData(raw: string): { delta?: unknown; message?: unknown } {
+function parseData(raw: string): {
+  delta?: unknown;
+  message?: unknown;
+  userMessageId?: unknown;
+  assistantMessageId?: unknown;
+} {
   try {
-    return JSON.parse(raw) as { delta?: unknown; message?: unknown };
+    return JSON.parse(raw) as {
+      delta?: unknown;
+      message?: unknown;
+      userMessageId?: unknown;
+      assistantMessageId?: unknown;
+    };
   } catch {
     return {};
   }
