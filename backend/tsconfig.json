@@ -26,5 +26,6 @@
     "noFallthroughCasesInSwitch": false,
     "moduleResolution": "node10",
     "ignoreDeprecations": "6.0"
-  }
+  },
+  "exclude": ["node_modules", "dist", "vitest.config.ts"]
 }

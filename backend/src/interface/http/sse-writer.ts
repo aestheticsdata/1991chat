@@ -15,7 +15,7 @@ export interface SseResponse {
 
 function frame(event: string | null, data: unknown): string {
   const payload = typeof data === "string" ? data : JSON.stringify(data);
-  return (event ? `event: ${event}\n` : "") + `data: ${payload}\n\n`;
+  return `${event ? `event: ${event}\n` : ""}data: ${payload}\n\n`;
 }
 
 /**
