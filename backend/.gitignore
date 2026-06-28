@@ -11,3 +11,6 @@ dist
 *.db
 *.db-shm
 *.db-wal
+
+# Local mock corpus — large gitignored artifact, built once, kept out of the repo
+/assets/mock-corpus.txt

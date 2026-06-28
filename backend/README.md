@@ -43,7 +43,7 @@ interface/http  ──►  application            ──►  domain/ports  ◄�
 
 ### Auth (session-based)
 
-- Opaque session id in an httpOnly cookie (`1991.sid`); server-side session in **Redis**
+- Opaque session id in an httpOnly cookie (`1991chat.sid`); server-side session in **Redis**
   (`express-session` + `connect-redis`), one active session per user.
 - **Double-submit CSRF**: a token kept in the session, returned in responses, required back in the
   `x-csrf-token` header on unsafe methods (`CsrfGuard`). `GET /auth/csrf` rotates it.
@@ -58,7 +58,7 @@ domain, application, or HTTP layers changes.
 
 ## API
 
-Auth column: **session** = requires the `1991.sid` cookie; **+CSRF** = also requires the
+Auth column: **session** = requires the `1991chat.sid` cookie; **+CSRF** = also requires the
 `x-csrf-token` header (unsafe methods).
 
 | Method | Route | Auth | Body / result |
@@ -80,23 +80,17 @@ Auth column: **session** = requires the `1991.sid` cookie; **+CSRF** = also requ
 
 ## Triggering the mock states by hand
 
-`/chat/stream` is session+CSRF protected, so authenticate first, then add the scenario header (it
-beats `?scenario=`, which beats the `MOCK_SCENARIO` default). No restart needed.
+The mock streams a normal reply unless a **keyword appears in the message content** — the simplest way
+to build the frontend's loading / error states without a real provider. No header, no query, no restart:
 
-```bash
-# log in, capturing the cookie jar + the CSRF token (use an account you created)
-csrf=$(curl -s -c jar -X POST localhost:6400/auth/login \
-  -H 'content-type: application/json' -d '{"username":"alice","password":"alice-password"}' \
-  | node -pe 'JSON.parse(require("fs").readFileSync(0)).csrfToken')
+| Keyword in the message | Behaviour |
+|---|---|
+| `/pending` | long "thinking" pause before the first token, then streams |
+| `/slow` | large inter-token gap (good for stress-testing the UI) |
+| `/error` | streams a random 1–2 sentence preamble, then aborts the stream with an `error` event |
+| _(none)_ | normal reply |
 
-# long "thinking" pause, then tokens
-curl -N -b jar -X POST localhost:6400/chat/stream \
-  -H 'content-type: application/json' -H "x-csrf-token: $csrf" -H 'x-mock-scenario: pending' \
-  -d '{"conversationId":"<id>","content":"hi"}'
-
-# a few tokens then an error event:  -H 'x-mock-scenario: stream-error'
-# slow tokens (good for the UI):     -H 'x-mock-scenario: slow'
-```
-
-Scenarios: `normal | pending | stream-error | slow`. Timings are tunable via the `MOCK_*` env vars.
-The stop button works end-to-end: closing the connection aborts the stream server-side.
+So `POST /chat/stream` with `{ "content": "hi /error" }` streams a sentence or two then an SSE `error` event.
+Timings are tunable via the `MOCK_*` env vars (`MOCK_PENDING_DELAY_MS`,
+`MOCK_SLOW_TOKEN_DELAY_MS`, `MOCK_TOKEN_DELAY_MS`). The stop button works
+end-to-end: closing the connection aborts the stream server-side.

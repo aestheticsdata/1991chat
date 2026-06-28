@@ -3,7 +3,7 @@ import type { NextRequest } from "next/server";
 /** The NestJS backend the BFF proxies to. Server-side only. */
 export const BACKEND_URL = process.env.BACKEND_URL ?? "http://localhost:6400";
 
-const FORWARD_REQUEST_HEADERS = ["cookie", "content-type", "x-csrf-token", "x-mock-scenario"];
+const FORWARD_REQUEST_HEADERS = ["cookie", "content-type", "x-csrf-token"];
 const RELAY_RESPONSE_HEADERS = ["content-type", "cache-control"];
 
 /**

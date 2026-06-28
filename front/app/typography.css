@@ -1,0 +1,18 @@
+/*
+ * Typography tokens — font sizes.
+ *
+ * Same idea as colors.css: a Tailwind v4 `@theme` block as the single source of
+ * truth. Each `--text-*` here generates the matching utility (`text-chat`, …) so
+ * a size can be tuned in one place. Imported from globals.css, after colors.css.
+ *
+ * The app chrome (sidebar, logo, headers) keeps Tailwind's default scale
+ * (`text-sm` = 14px, `text-base` = 16px) and is intentionally left alone. These
+ * tokens are for the chat reading surfaces, which otherwise fall back to the
+ * 16px body default and read too large.
+ */
+@theme {
+  /* Chat messages + the composer/prompt input. 14px, matching the app's
+     `text-sm` rhythm (was the 16px body default). Nudge to 0.9375rem (15px) if
+     long messages feel too small. */
+  --text-chat: 0.875rem;
+}

@@ -17,9 +17,7 @@ export default async function ChatPage() {
 
   return (
     <>
-      <section className="min-h-0 flex-1 overflow-y-auto">
-        <ChatDisplay />
-      </section>
+      <ChatDisplay />
       <footer className="shrink-0">
         <Prompt />
       </footer>

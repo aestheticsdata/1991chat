@@ -1,5 +1,6 @@
 {
-  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.5.0/schema.json",
+  "root": false,
   "vcs": {
     "enabled": true,
     "clientKind": "git",
@@ -19,10 +20,21 @@
       "quoteStyle": "double"
     }
   },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
+    }
+  },
   "linter": {
     "enabled": true,
     "rules": {
-      "preset": "recommended"
+      "preset": "recommended",
+      "style": {
+        "useImportType": {
+          "level": "warn",
+          "options": { "style": "separatedType" }
+        }
+      }
     }
   }
 }

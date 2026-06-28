@@ -71,7 +71,10 @@ export const en = {
   chat: {
     composerPlaceholder: "Send a message…",
     send: "Send",
+    stop: "Stop",
+    scrollToBottom: "Scroll to bottom",
     conversations: "Conversations",
+    thinking: "Assistant is thinking…",
   },
 
   shell: {

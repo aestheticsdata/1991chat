@@ -1,7 +1,15 @@
 /**
  * Conversation + message DTOs — the serialized shapes the BFF returns. Dates
  * arrive as ISO-8601 strings over the wire (not `Date` objects).
+ *
+ * Types only. The `ROLE` / `STATUS` value objects live in
+ * conversation.constants.ts; the role/status types are derived from them.
  */
+
+import type { ROLE, STATUS } from "@services/conversation.constants";
+
+export type MessageRole = (typeof ROLE)[keyof typeof ROLE];
+export type MessageStatus = (typeof STATUS)[keyof typeof STATUS];
 
 export interface ConversationSummary {
   id: string;
@@ -9,9 +17,6 @@ export interface ConversationSummary {
   createdAt: string;
   updatedAt: string;
 }
-
-export type MessageRole = "user" | "assistant" | "system";
-export type MessageStatus = "pending" | "streaming" | "complete" | "error";
 
 export interface Message {
   id: string;

@@ -1,5 +1,7 @@
 "use client";
 
+import { EVENT } from "@services/chat.constants";
+import { chatStreamEventSchema } from "@services/chat.schema";
 import type { ChatStreamEvent, SendMessageInput } from "@services/chat.types";
 import * as http from "@services/http/client";
 import { parseError } from "@services/http/errors";
@@ -14,7 +16,7 @@ import { readSse } from "@services/http/sse";
  *
  *   const controller = new AbortController();
  *   for await (const ev of chatService.streamMessage(input, { signal: controller.signal })) {
- *     if (ev.type === "delta") append(ev.delta);
+ *     if (ev.type === EVENT.DELTA) append(ev.delta);
  *   }
  */
 export const chatService = {
@@ -30,39 +32,30 @@ export const chatService = {
     if (!res.ok) throw await parseError(res);
 
     for await (const frame of readSse(res)) {
-      if (frame.event === "open") {
-        const { userMessageId, assistantMessageId } = parseData(frame.data);
-        yield {
-          type: "open",
-          userMessageId: typeof userMessageId === "string" ? userMessageId : "",
-          assistantMessageId: typeof assistantMessageId === "string" ? assistantMessageId : "",
-        };
-      } else if (frame.event === "done") {
-        yield { type: "done" };
-      } else if (frame.event === "error") {
-        const message = parseData(frame.data).message;
-        yield { type: "error", message: typeof message === "string" ? message : "Stream failed" };
+      // Validate each frame's payload against the schema at the boundary. The
+      // `.catch` defaults baked into the event shapes keep a malformed open/error
+      // frame from tearing down the stream; a non-string delta is simply skipped.
+      const data = parseJson(frame.data);
+      if (frame.event === EVENT.OPEN) {
+        yield chatStreamEventSchema.parse({ ...data, type: EVENT.OPEN });
+      } else if (frame.event === EVENT.DONE) {
+        yield { type: EVENT.DONE };
+      } else if (frame.event === EVENT.ERROR) {
+        yield chatStreamEventSchema.parse({ ...data, type: EVENT.ERROR });
       } else {
-        const delta = parseData(frame.data).delta;
-        if (typeof delta === "string") yield { type: "delta", delta };
+        // Token deltas are the unnamed frames.
+        const delta = chatStreamEventSchema.safeParse({ ...data, type: EVENT.DELTA });
+        if (delta.success) yield delta.data;
       }
     }
   },
 };
 
-function parseData(raw: string): {
-  delta?: unknown;
-  message?: unknown;
-  userMessageId?: unknown;
-  assistantMessageId?: unknown;
-} {
+/** Parse a frame's `data:` JSON into a plain object; `{}` on any non-object or parse error. */
+function parseJson(raw: string): Record<string, unknown> {
   try {
-    return JSON.parse(raw) as {
-      delta?: unknown;
-      message?: unknown;
-      userMessageId?: unknown;
-      assistantMessageId?: unknown;
-    };
+    const value: unknown = JSON.parse(raw);
+    return value !== null && typeof value === "object" ? (value as Record<string, unknown>) : {};
   } catch {
     return {};
   }

@@ -11,9 +11,13 @@
     "check": "biome check --write ."
   },
   "dependencies": {
+    "@tailwindcss/typography": "^0.5.20",
     "next": "^16.2.9",
     "react": "^19.2.7",
-    "react-dom": "^19.2.7"
+    "react-dom": "^19.2.7",
+    "react-markdown": "^10.1.0",
+    "zod": "^4.4.3",
+    "zustand": "^5.0.14"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.0",
@@ -21,6 +25,7 @@
     "@types/node": "^24.13.2",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
+    "babel-plugin-react-compiler": "^1.0.0",
     "postcss": "^8.4.49",
     "tailwindcss": "^4.3.1",
     "typescript": "^6.0.3"

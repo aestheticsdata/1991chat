@@ -1,5 +1,3 @@
-import { parseScenario, Scenario } from "@infrastructure/llm/mock/scenario";
-
 /** DI token for the validated, typed application config. */
 export const APP_CONFIG = Symbol("APP_CONFIG");
 
@@ -15,11 +13,10 @@ export interface AppConfig {
     baseUrl: string;
   };
   mock: {
-    defaultScenario: Scenario;
     tokenDelayMs: number;
     slowTokenDelayMs: number;
     pendingDelayMs: number;
-    errorAfterTokens: number;
+    corpusPath: string;
   };
   redis: {
     url: string;
@@ -75,11 +72,10 @@ export function loadConfig(): AppConfig {
       baseUrl: process.env.LLM_BASE_URL?.trim() || "",
     },
     mock: {
-      defaultScenario: parseScenario(process.env.MOCK_SCENARIO, "normal"),
       tokenDelayMs: intFromEnv(process.env.MOCK_TOKEN_DELAY_MS, 45),
       slowTokenDelayMs: intFromEnv(process.env.MOCK_SLOW_TOKEN_DELAY_MS, 600),
       pendingDelayMs: intFromEnv(process.env.MOCK_PENDING_DELAY_MS, 8000),
-      errorAfterTokens: intFromEnv(process.env.MOCK_ERROR_AFTER_TOKENS, 4),
+      corpusPath: process.env.MOCK_CORPUS_PATH?.trim() || "./assets/mock-corpus.txt",
     },
     redis: {
       url: process.env.REDIS_URL?.trim() || "redis://localhost:6379",
