@@ -14,3 +14,11 @@ out/
 # Secrets — *.example files ARE committed, real envs are NOT
 .env
 .env*.local
+
+# Kept OUT of git: the secret-bearing backend PM2 env (SESSION_SECRET; mirrors
+# pfa), plus the server-specific nginx vhost and deploy doc — they expose the
+# host layout + sibling domains, and pfa likewise doesn't track its nginx conf.
+# The deploy SCRIPTS + front ecosystem ARE committed, like pfa.
+ecosystem.config.js
+chat.nginx.conf
+DEPLOY.md
