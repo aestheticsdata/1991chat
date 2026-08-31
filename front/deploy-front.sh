@@ -244,7 +244,7 @@ EOF
   trap - ERR
 
   log "✅ Deployment completed successfully"
-  log "ℹ️  Next.js app (port 6401) settings are read from $PM2_ECOSYSTEM_FILE"
+  log "ℹ️  Next.js app (port 3011) settings are read from $PM2_ECOSYSTEM_FILE"
   log "ℹ️  Previous version is available in: $BACKUP_DIR"
   log "ℹ️  All releases are stored under: $RELEASES_DIR"
   log "ℹ️  You can manually rollback with: ./deploy-front.sh rollback"

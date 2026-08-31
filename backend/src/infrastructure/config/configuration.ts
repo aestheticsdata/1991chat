@@ -64,7 +64,7 @@ export function loadConfig(): AppConfig {
 
   return {
     port: intFromEnv(process.env.PORT, 6400),
-    corsOrigin: process.env.CORS_ORIGIN?.trim() || "http://localhost:6401",
+    corsOrigin: process.env.CORS_ORIGIN?.trim() || "http://localhost:3011",
     databasePath: process.env.DATABASE_PATH?.trim() || "./data/1991chat.db",
     llm: {
       provider,

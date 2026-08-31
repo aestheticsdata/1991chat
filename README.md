@@ -44,11 +44,11 @@ Requires **Node ≥ 24**, **pnpm 11**, and a running **Redis**.
 # 1) backend — http://localhost:6400
 cd backend && pnpm install && cp .env.example .env && pnpm start:dev
 
-# 2) frontend — http://localhost:6401
+# 2) frontend — http://localhost:3011
 cd front && pnpm install && cp .env.local.example .env.local && pnpm dev
 ```
 
-Open <http://localhost:6401> and create an account on the sign-up page (no default user is seeded).
+Open <http://localhost:3011> and create an account on the sign-up page (no default user is seeded).
 
 ## Testing frontend states (mock scenarios)
 
@@ -70,4 +70,4 @@ error threshold are tunable via the `MOCK_*` vars in `backend/.env`.
 NestJS 11 · Next.js 16 · React 19 · TypeScript 6 · Tailwind CSS 4 · Zustand 5 · SQLite (better-sqlite3) ·
 Redis (express-session) · Vitest 4 · Biome 2.5 · Node 24 · pnpm 11
 
-The API runs on port `6400`, the front on `6401`.
+The API runs on port `6400`, the front on `3011`.

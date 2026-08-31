@@ -15,7 +15,7 @@ cp .env.example .env      # LLM_API_KEY and SESSION_SECRET are required
 pnpm start:dev            # http://localhost:6400
 ```
 
-The API runs on `6400`, the front on `6401`.
+The API runs on `6400`, the front on `3011`.
 
 No default user is seeded — create one via the sign-up page or `POST /auth/register`. (Optionally set
 `AUTH_DEFAULT_*` to seed one on first start.) The SQLite file is created at `DATABASE_PATH` (default
