@@ -15,7 +15,10 @@ cp .env.example .env      # LLM_API_KEY and SESSION_SECRET are required
 pnpm start:dev            # http://localhost:6400
 ```
 
-The API runs on `6400`, the front on `3011`.
+The API runs on `6400`, the front on `3011` — the API in this app's reserved `6400–6499` block on
+ks-b, the front in the `30xx` range every front on the fleet uses. `CORS_ORIGIN` must match the front's
+origin or the browser calls fail while the server-to-server ones keep working, which is a confusing way
+to find out.
 
 No default user is seeded — create one via the sign-up page or `POST /auth/register`. (Optionally set
 `AUTH_DEFAULT_*` to seed one on first start.) The SQLite file is created at `DATABASE_PATH` (default

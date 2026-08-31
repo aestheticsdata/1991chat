@@ -70,4 +70,7 @@ error threshold are tunable via the `MOCK_*` vars in `backend/.env`.
 NestJS 11 · Next.js 16 · React 19 · TypeScript 6 · Tailwind CSS 4 · Zustand 5 · SQLite (better-sqlite3) ·
 Redis (express-session) · Vitest 4 · Biome 2.5 · Node 24 · pnpm 11
 
-The API runs on port `6400`, the front on `3011`.
+The API runs on port `6400`, the front on `3011` — and the mismatch is deliberate. On ks-b every app
+owns a `6N00–6N99` block for its API (1991chat's is `6400–6499`) while every front lives in `30xx`.
+The front sat on `6401`, inside this app's own API block, until ZEU-74 moved it out. Dev uses the same
+two ports as production, so `CORS_ORIGIN` in `backend/.env` has to name the front's real origin.
